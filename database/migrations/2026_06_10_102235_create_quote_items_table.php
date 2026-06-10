@@ -9,31 +9,27 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+   public function up(): void
 {
-    Schema::create('quotes', function (Blueprint $table) {
+    Schema::create('quote_items', function (Blueprint $table) {
         $table->id();
-        $table->string('number')->unique();
-        $table->unsignedBigInteger('client_id')->nullable();
-        $table->string('client_name')->nullable();
-        $table->string('contact_person')->nullable();
-        $table->string('venue')->nullable();
-        $table->string('no_of_guests', 50)->nullable();
-        $table->date('quote_date')->nullable();
-        $table->date('valid_until')->nullable();
-        $table->string('status', 20)->default('pending');
-        $table->decimal('subtotal', 14, 2)->default(0);
-        $table->decimal('vat_rate', 5, 2)->default(16);
-        $table->decimal('vat_amount', 14, 2)->default(0);
-        $table->decimal('total', 14, 2)->default(0);
-        $table->text('notes')->nullable();
-        $table->string('created_by')->nullable();
+        $table->foreignId('quote_id')
+              ->constrained('quotes')
+              ->onDelete('cascade');
+        $table->string('type', 20)->default('item');
+        $table->string('section')->nullable();
+        $table->string('subsection')->nullable();
+        $table->string('name')->nullable();
+        $table->decimal('qty', 10, 2)->default(0);
+        $table->decimal('unit_price', 12, 2)->default(0);
+        $table->decimal('price', 14, 2)->default(0);
+        $table->integer('sort_order')->default(0);
         $table->timestamps();
     });
 }
 
 public function down(): void
 {
-    Schema::dropIfExists('quotes');
+    Schema::dropIfExists('quote_items');
 }
 };
