@@ -1,5 +1,5 @@
 // ── Config & Constants ─────────────────────────────────────────
-const API_BASE = '/api';
+const API_BASE = 'https://cayan-api.onrender.com';
 
 // ── Offline / Local Storage DB (runs when no PHP server available) ─────────
 const OFFLINE = (() => {
