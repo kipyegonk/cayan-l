@@ -384,7 +384,7 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
   /* Buttons full width on small forms */
   .button { font-size: 13px; padding: 10px 16px; }
 
-  /* ── Toast — full width on mobile ─────────────────────────── */
+  /* Toast — full width on mobile */
   .toast { left: 14px; right: 14px; top: 14px; text-align: center; }
 
   /* ── Quote preview — scale to fit viewport width ──────────── */
