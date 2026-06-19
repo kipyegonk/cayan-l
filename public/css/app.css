@@ -347,7 +347,7 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
   .page-header .button { width: 100%; justify-content: center; }
   .page-title { font-size: 19px; }
 
-  /* ── Stats grid — stack to 2 columns, then 1 on very small ──── */
+  /* Stats grid — stack to 2 columns, then 1 on very small */
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
