@@ -1,97 +1,32 @@
-// Views: Auth, Dashboard, Quotes List 
+// ── Views: Auth, Dashboard, Quotes List ────────────────────────
+// These methods are mixed into the app object in app-core.js
+
+const CAYAN_LOGO_B64 = 'data:image/jpeg;base64,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';
 
 Object.assign(app, {
 renderAuth() {
-    const m    = this.state.authMode;
-    const logo = this.state.company?.logo || '';
+    const m = this.state.authMode;
     return `<div class="auth-screen">
-
-      <!-- Left panel — branding -->
       <div class="auth-left">
-        <div class="auth-brand">
-          ${logo
-            ? '<img src="' + logo + '" alt="Logo" style="width:140px;height:auto;object-fit:contain;margin-bottom:18px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));">'
-            : '<div style="font-size:72px;margin-bottom:18px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));">🏕</div>'
-          }
-          <h1 class="auth-brand-name">${this.state.company?.name || 'Cayan Events Ke.'}</h1>
-          <div class="auth-divider"></div>
-          <p class="auth-brand-tagline">Professional Quote Management</p>
-          <div class="auth-features">
-            <div class="auth-feature">📄 Professional Quotations</div>
-            <div class="auth-feature">👥 Client Management</div>
-            <div class="auth-feature">📦 Item Catalog</div>
-            <div class="auth-feature">🖨 Print & Export PDF</div>
-          </div>
-        </div>
+        <img src="${this.state.company?.logo || CAYAN_LOGO_B64}" alt="Cayan Events Ke." style="width:180px;height:auto;object-fit:contain;margin-bottom:18px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));">
+        <h1 style="color:#fff;font-size:26px;font-weight:800;margin:0 0 10px;text-align:center;">${this.state.company?.name || 'Cayan Events Ke.'}</h1>
+        <p style="color:rgba(255,255,255,0.55);text-align:center;line-height:1.7;max-width:300px;font-size:14px;">Professional quotations, client management, and item catalog — all in one place.</p>
       </div>
-
-      <!-- Right panel — form -->
       <div class="auth-right">
-        <div class="auth-form-wrap">
-          <!-- Mobile logo -->
-          <div class="auth-mobile-logo">
-            ${logo
-              ? '<img src="' + logo + '" alt="Logo" style="width:80px;height:auto;object-fit:contain;">'
-              : '<div style="font-size:40px;">🏕</div>'
-            }
-            <div style="font-size:16px;font-weight:800;color:#760014;margin-top:6px;">${this.state.company?.name || 'Cayan Events Ke.'}</div>
-          </div>
-
-          <h2 class="auth-title">${m === 'login' ? 'Welcome Back' : 'Create Account'}</h2>
-          <p class="auth-subtitle">${m === 'login' ? 'Sign in to your account to continue.' : 'Register to request access.'}</p>
-
-          <!-- Mode tabs -->
-          <div class="auth-tabs">
-            <button class="auth-tab ${m==='login'?'active':''}" data-mode="login">Sign In</button>
-            <button class="auth-tab ${m==='register'?'active':''}" data-mode="register">Register</button>
-          </div>
-
-          <!-- Form fields -->
-          <div class="auth-fields">
-            ${m === 'register' ? `
-            <div class="auth-field-group">
-              <label class="auth-label">Full Name</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">👤</span>
-                <input type="text" id="reg-name" class="auth-input" placeholder="Your full name" autocomplete="name">
-              </div>
-            </div>` : ''}
-            <div class="auth-field-group">
-              <label class="auth-label">Email Address</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">✉️</span>
-                <input type="email" id="auth-email" class="auth-input" placeholder="your@email.com" autocomplete="email">
-              </div>
-            </div>
-            <div class="auth-field-group">
-              <label class="auth-label">Password</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">🔒</span>
-                <input type="password" id="auth-password" class="auth-input" placeholder="Enter your password" autocomplete="current-password">
-                <button type="button" class="auth-eye-btn" onclick="
-                  const inp = document.getElementById('auth-password');
-                  inp.type = inp.type==='password' ? 'text' : 'password';
-                  this.textContent = inp.type==='password' ? '👁' : '🙈';
-                ">👁</button>
-              </div>
-            </div>
-          </div>
-
-          <button id="auth-submit" class="auth-submit-btn">
-            ${m === 'login' ? 'Sign In' : 'Submit Registration'}
-            <span style="margin-left:6px;">→</span>
-          </button>
-
-          ${m === 'login' ? `
-          <div class="auth-hint">
-            <span>🔑</span> Default: <strong>admin@company.com</strong> / <strong>admin123</strong>
-          </div>` : `
-          <div class="auth-hint">
-            <span>ℹ️</span> Your account needs admin approval before you can log in.
-          </div>`}
+        <h2 style="font-size:22px;font-weight:800;color:var(--navy);margin:0 0 4px;">${m === 'login' ? 'Welcome back' : 'Create account'}</h2>
+        <p style="color:var(--gray);font-size:13px;margin:0 0 28px;">${m === 'login' ? 'Sign in to continue.' : 'Register for access.'}</p>
+        <div style="display:flex;background:var(--bg);border-radius:8px;padding:4px;margin-bottom:24px;">
+          <button class="auth-mode-btn" data-mode="login" style="flex:1;padding:8px;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;background:${m==='login'?'#fff':'transparent'};color:${m==='login'?'var(--navy)':'var(--gray)'};">Sign In</button>
+          <button class="auth-mode-btn" data-mode="register" style="flex:1;padding:8px;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;background:${m==='register'?'#fff':'transparent'};color:${m==='register'?'var(--navy)':'var(--gray)'};">Register</button>
         </div>
+        ${m === 'register' ? '<div class="form-group"><label>Full Name</label><input type="text" id="reg-name" class="input-field" placeholder="Your full name"></div>' : ''}
+        <div class="form-group"><label>Email</label><input type="email" id="auth-email" class="input-field" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Password</label><input type="password" id="auth-password" class="input-field" placeholder="Min. 6 characters"></div>
+        <button id="auth-submit" class="button navy" style="width:100%;justify-content:center;padding:12px;margin-top:16px;">
+          ${m === 'login' ? 'Sign In →' : 'Submit Registration'}
+        </button>
+        ${m === 'login' ? '<p style="text-align:center;font-size:11px;color:#9CA3AF;margin:14px 0 0;">Default: admin@company.com / admin123</p>' : ''}
       </div>
-
     </div>`;
   },
 
@@ -110,10 +45,7 @@ renderAuth() {
       <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
       <aside class="sidebar" id="app-sidebar">
         <div class="sidebar-header">
-          ${this.state.company.logo
-            ? '<img src="' + this.state.company.logo + '" alt="Logo" style="width:80px;height:auto;object-fit:contain;display:block;margin-bottom:6px;border-radius:4px;">'
-            : '<div class="logo">📋</div>'
-          }
+          <img src="${this.state.company.logo || CAYAN_LOGO_B64}" alt="Logo" style="width:80px;height:auto;object-fit:contain;display:block;margin-bottom:6px;">
           <div class="company-name">${this.state.company.name || 'QuoteSystem'}</div>
           <div class="user-name">${this.state.user?.name || ''}</div>
           <div class="role-badge">${(this.state.user?.role || '').toUpperCase()}</div>
