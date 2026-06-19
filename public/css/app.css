@@ -362,7 +362,7 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
   .form-grid { grid-template-columns: 1fr; gap: 10px; }
   .input-field { font-size: 16px; } /* prevents iOS zoom-on-focus */
 
-  /* ── Tables — horizontal scroll wrapper ───────────────────── */
+  /* Tables — horizontal scroll wrapper */
   table { font-size: 12px; }
   table th, table td { padding: 8px 6px; white-space: nowrap; }
   .card:has(table) { overflow-x: auto; -webkit-overflow-scrolling: touch; }
