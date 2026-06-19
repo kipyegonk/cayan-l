@@ -358,7 +358,7 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
   /* Cards */
   .card { padding: 16px; border-radius: 10px; }
 
-  /* ── Forms — single column always ─────────────────────────── */
+  /* Forms — single column always */
   .form-grid { grid-template-columns: 1fr; gap: 10px; }
   .input-field { font-size: 16px; } /* prevents iOS zoom-on-focus */
 
