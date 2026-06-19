@@ -355,7 +355,7 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
   .stat-card { padding: 14px; }
   .stat-value { font-size: 17px; }
 
-  /* ── Cards ─────────────────────────────────────────────────── */
+  /* Cards */
   .card { padding: 16px; border-radius: 10px; }
 
   /* ── Forms — single column always ─────────────────────────── */
