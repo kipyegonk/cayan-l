@@ -106,7 +106,9 @@ renderAuth() {
       { id: 'settings',  emoji: '⚙️', label: 'Settings' },
     ];
     return `<div class="container">
-      <aside class="sidebar">
+      <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+      <aside class="sidebar" id="app-sidebar">
         <div class="sidebar-header">
           ${this.state.company.logo
             ? '<img src="' + this.state.company.logo + '" alt="Logo" style="width:80px;height:auto;object-fit:contain;display:block;margin-bottom:6px;border-radius:4px;">'
