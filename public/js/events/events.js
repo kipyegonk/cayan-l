@@ -47,7 +47,7 @@ Object.assign(app, {
     });
 
     // Nav 
-    // ── Nav ───────────────────────────────────────────────────────────────────
+    //  Nav 
     document.querySelectorAll('.nav-item').forEach(b =>
       b.addEventListener('click', (e) => {
         this.setView(e.currentTarget.dataset.view);
@@ -56,7 +56,7 @@ Object.assign(app, {
       }));
     document.getElementById('logout-btn')?.addEventListener('click', () => this.handleLogout());
 
-    // ── Mobile menu toggle ──────────────────────────────────────────────────────
+    //  Mobile menu toggle 
     document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
       document.getElementById('app-sidebar')?.classList.add('open');
       document.getElementById('sidebar-backdrop')?.classList.add('open');
