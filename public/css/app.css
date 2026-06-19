@@ -318,7 +318,7 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
 
 @media (max-width: 900px) {
 
-  /* ── App shell ─────────────────────────────────────────────── */
+  /* App shell */
   .container { position: relative; height: 100vh; overflow: hidden; }
 
   .mobile-menu-btn { display: flex; }
