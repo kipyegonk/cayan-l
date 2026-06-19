@@ -47,9 +47,24 @@ Object.assign(app, {
     });
 
     // Nav 
+    // ── Nav ───────────────────────────────────────────────────────────────────
     document.querySelectorAll('.nav-item').forEach(b =>
-      b.addEventListener('click', (e) => this.setView(e.currentTarget.dataset.view)));
+      b.addEventListener('click', (e) => {
+        this.setView(e.currentTarget.dataset.view);
+        document.getElementById('app-sidebar')?.classList.remove('open');
+        document.getElementById('sidebar-backdrop')?.classList.remove('open');
+      }));
     document.getElementById('logout-btn')?.addEventListener('click', () => this.handleLogout());
+
+    // ── Mobile menu toggle ──────────────────────────────────────────────────────
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+      document.getElementById('app-sidebar')?.classList.add('open');
+      document.getElementById('sidebar-backdrop')?.classList.add('open');
+    });
+    document.getElementById('sidebar-backdrop')?.addEventListener('click', () => {
+      document.getElementById('app-sidebar')?.classList.remove('open');
+      document.getElementById('sidebar-backdrop')?.classList.remove('open');
+    });
 
     // Quote preview buttons 
     document.querySelectorAll('[data-preview-quote]').forEach(btn => {
