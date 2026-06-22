@@ -413,3 +413,118 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
   .sidebar-header .company-name { font-size: 13px; }
   .page-title { font-size: 17px; }
 }
+/* MOBILE RESPONSIVE */
+
+.mobile-menu-btn {
+  display: none;
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 1100;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: #760014;
+  color: #D0A95E;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+
+.sidebar-backdrop.open { display: block; }
+
+@media (max-width: 900px) {
+
+  .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
+
+  .container { position: relative; }
+
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 250px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+  }
+
+  .sidebar.open { transform: translateX(0); }
+
+  .main { padding: 68px 14px 24px; width: 100%; }
+
+  .page-header { flex-direction: column; gap: 10px; }
+  .page-header .button { width: 100%; justify-content: center; }
+  .page-title { font-size: 18px; }
+
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .stat-card { padding: 14px; }
+  .stat-value { font-size: 16px; }
+
+  .card { padding: 14px; }
+
+  .form-grid { grid-template-columns: 1fr; gap: 10px; }
+
+  .input-field { font-size: 16px; }
+
+  table { font-size: 12px; display: block; overflow-x: auto; white-space: nowrap; }
+  table th, table td { padding: 8px 6px; }
+
+  .modal { padding: 0; align-items: flex-end; }
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 16px 16px 0 0;
+    max-height: 90vh;
+    padding: 20px;
+  }
+
+  .auth-screen { flex-direction: column; }
+  .auth-left { display: none; }
+  .auth-right { width: 100%; min-height: 100vh; }
+  .auth-form-wrap { padding: 40px 24px; }
+  .auth-mobile-logo { display: block; }
+
+  .toast {
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    text-align: center;
+  }
+
+  .quote-preview-overlay { padding: 0; align-items: flex-start; }
+  .quote-preview-wrapper {
+    width: 100vw;
+    padding: 14px 12px 30px;
+    font-size: 7pt;
+  }
+  .qp-header { flex-direction: column; gap: 8px; }
+  .qp-logo-img { width: 120px; margin-left: 0; }
+  .qp-title-block h1 { font-size: 15pt; }
+  .qp-table { font-size: 6.5pt; }
+  .qp-table th, .qp-table td { padding: 3px 4px; }
+  .qp-totals-table { width: 100%; }
+  .qp-sig-row { flex-direction: column; gap: 14px; }
+  .qp-controls {
+    margin: -14px -12px 14px;
+    flex-wrap: wrap;
+    padding: 8px;
+  }
+  .qp-controls button { flex: 1; font-size: 12px; }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .page-title { font-size: 16px; }
+  .stat-value { font-size: 15px; }
+  .button { font-size: 13px; padding: 9px 14px; }
+}
