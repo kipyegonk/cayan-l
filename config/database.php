@@ -86,12 +86,12 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('postgresql://postgres:@26Kayan001@db.ucvimacvzxtshjxhcatw.supabase.co:5432/postgres'),
-            'host' => env('DB_HOST', 'db.ucvimacvzxtshjxhcatw.supabase.co'),
+            'url' => env('postgresql:postgresql://cayan_db_user:X8WxegaH0JqPI5Ag867WZ0EktnUtKJy4@dpg-d8seufmrnols738j0m5g-a/cayan_db'),
+            'host' => env('DB_HOST', ''),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'postgres'),
-            'username' => env('DB_USERNAME', 'postgres'),
-            'password' => env('DB_PASSWORD', '@26Kayan001'),
+            'database' => env('DB_DATABASE', ''),
+            'username' => env('DB_USERNAME', ''),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => env('DB_CHARSET', 'utf8'),
             'prefix' => '',
             'prefix_indexes' => true,
