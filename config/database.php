@@ -87,7 +87,7 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('postgresql:postgresql://cayan_db_user:X8WxegaH0JqPI5Ag867WZ0EktnUtKJy4@dpg-d8seufmrnols738j0m5g-a/cayan_db'),
-            'host' => env('DB_HOST', ''),
+            'host' => env('DB_HOST', 'dpg-d8seufmrnols738j0m5g-a'),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'cayan_db'),
             'username' => env('DB_USERNAME', 'cayan_db_user'),
