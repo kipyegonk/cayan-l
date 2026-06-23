@@ -25,14 +25,14 @@ body {
   color: #111;
 }
 
-/* ─── App Shell ──────────────────────────────────────────── */
+/* App Shell */
 .container {
   display: flex;
   height: 100vh;
   overflow: hidden;
 }
 
-/* ─── Sidebar ────────────────────────────────────────────── */
+/* Sidebar */
 .sidebar {
   width: 220px;
   background: #760014;
