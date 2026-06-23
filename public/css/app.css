@@ -470,9 +470,7 @@ label {
   .qp-controls button { flex: 1; font-size: 12px; padding: 8px 10px; }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   PHONE  (≤ 480px)
-   ═══════════════════════════════════════════════════════════ */
+/* PHONE  (≤ 480px) */
 @media (max-width: 480px) {
 
   /* Stats: 2 columns on phone */
