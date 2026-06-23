@@ -247,7 +247,7 @@ body {
 .page-title    { margin: 0; font-size: 22px; font-weight: 800; color: #760014; }
 .page-subtitle { color: var(--gray); font-size: 13px; margin-top: 4px; }
 
-/* ─── Stats Grid ─────────────────────────────────────────── */
+/* Stats Grid */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
