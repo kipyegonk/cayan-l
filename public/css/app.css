@@ -121,7 +121,7 @@ body {
   box-shadow: 0 0 0 3px rgba(208,169,94,0.15);
 }
 
-/* ─── Buttons ────────────────────────────────────────────── */
+/* Buttons */
 .button {
   padding: 9px 18px; background: #760014; color: #fff;
   border: none; border-radius: 7px; font-size: 13px; font-weight: 600;
@@ -134,7 +134,7 @@ body {
 .button.red    { background: var(--red); }
 .button.secondary { background: #F3F4F6; color: #374151; }
 
-/* ─── Utility ────────────────────────────────────────────── */
+/* Utility */
 .hidden { display: none !important; }
 
 /* Loader */
