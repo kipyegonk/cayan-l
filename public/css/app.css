@@ -305,7 +305,7 @@ label {
 .form-group     { display: flex; flex-direction: column; }
 .form-group.full { grid-column: 1 / -1; }
 
-/* ─── Quote Preview ──────────────────────────────────────── */
+/* Quote Preview */
 .quote-preview-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.6);
   display: flex; align-items: flex-start; justify-content: center;
