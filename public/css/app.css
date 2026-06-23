@@ -363,7 +363,7 @@ label {
 }
 .cayan-logo-svg { width: 220px; height: auto; }
 
-/* ─── Mobile menu button (hamburger) ─────────────────────── */
+/* Mobile menu button (hamburger) */
 .mobile-menu-btn {
   display: none;
   position: fixed; top: 14px; left: 14px; z-index: 1100;
