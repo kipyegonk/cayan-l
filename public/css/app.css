@@ -266,7 +266,7 @@ body {
 }
 .stat-value { font-size: 20px; font-weight: 800; color: #111; }
 
-/* ─── Tables ─────────────────────────────────────────────── */
+/* Tables */
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 table thead tr { background: #F8FAFC; }
 table th {
