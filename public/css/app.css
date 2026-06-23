@@ -83,10 +83,10 @@ body {
 }
 .logout-btn:hover { background: rgba(208,169,94,0.1); }
 
-/* ─── Main content ───────────────────────────────────────── */
+/* Main content */
 .main { flex: 1; overflow-y: auto; padding: 28px; }
 
-/* ─── Toast ──────────────────────────────────────────────── */
+/* Toast */
 .toast {
   position: fixed; top: 20px; right: 20px; z-index: 9999;
   padding: 12px 22px; border-radius: 9px; color: #fff;
