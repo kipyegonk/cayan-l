@@ -137,7 +137,7 @@ body {
 /* ─── Utility ────────────────────────────────────────────── */
 .hidden { display: none !important; }
 
-/* ─── Loader ─────────────────────────────────────────────── */
+/* Loader */
 .loader {
   display: flex; align-items: center; justify-content: center;
   height: 100vh; background: var(--bg); font-family: system-ui, sans-serif;
