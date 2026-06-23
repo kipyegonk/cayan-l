@@ -499,9 +499,7 @@ label {
   .qp-table     { font-size: 6pt; }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   VERY SMALL PHONE  (≤ 360px)
-   ═══════════════════════════════════════════════════════════ */
+/* VERY SMALL PHONE  (≤ 360px) */
 @media (max-width: 360px) {
 
   /* Stats: 1 column on very tiny screens */
