@@ -266,9 +266,7 @@ label {
 .form-group { display: flex; flex-direction: column; }
 .form-group.full { grid-column: 1 / -1; }
 
-/* ══════════════════════════════════════════════════════
-   QUOTE PREVIEW
-   ══════════════════════════════════════════════════════ */
+/* QUOTE PREVIEW */
 
 .quote-preview-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.6);
