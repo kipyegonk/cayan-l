@@ -30,7 +30,7 @@ body {
   position: relative;
 }
 
-/* ── Sidebar ─────────────────────────────────────────── */
+/* Sidebar */
 .sidebar {
   width: 220px;
   background: var(--maroon);
