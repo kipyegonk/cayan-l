@@ -345,9 +345,7 @@ label {
   .main { padding: 20px; }
 }
 
-/* ══════════════════════════════════════════════════════
-   MOBILE (max 768px) — full responsive overhaul
-   ══════════════════════════════════════════════════════ */
+/* MOBILE (max 768px) — full responsive overhaul */
 
 @media (max-width: 768px) {
 
