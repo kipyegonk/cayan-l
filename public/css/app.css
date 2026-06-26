@@ -256,7 +256,7 @@ table tbody tr:nth-child(even) { background: #FAFAFA; }
   font-size: 20px; color: var(--gray); padding: 4px; line-height: 1;
 }
 
-/* ── Form ───────────────────────────────────────────── */
+/* Form */
 label {
   display: block; font-size: 12px; font-weight: 700;
   color: #374151; margin-bottom: 5px;
