@@ -219,7 +219,7 @@ table th {
 table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
 table tbody tr:nth-child(even) { background: #FAFAFA; }
 
-/* ── Mobile card rows (replaces table on small screens) */
+/* Mobile card rows (replaces table on small screens) */
 .mobile-card-row {
   display: none;
   background: #fff; border-radius: 10px;
