@@ -180,9 +180,7 @@ body {
 
 .auth-mobile-logo { display: none; text-align: center; margin-bottom: 24px; }
 
-/* ══════════════════════════════════════════════════════
-   PAGE LAYOUT
-   ══════════════════════════════════════════════════════ */
+/* PAGE LAYOUT */
 
 .page-header {
   display: flex; justify-content: space-between;
