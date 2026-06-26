@@ -1,4 +1,4 @@
-// ── Views: Quotes ──────────────────────────────────────────────
+// ── Views: Quotes 
 
 Object.assign(app, {
   renderQuotesList() {
