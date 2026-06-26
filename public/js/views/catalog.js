@@ -1,4 +1,4 @@
-// ── Views: Catalog ──────────────────────────────────────────────
+// ── Views: Catalog 
 
 const CATEGORIES = ['Tents & Structures','Flowers & Décor','Lighting','Furniture','Catering','Logistics','Audio Visual','Miscellaneous'];
 const UNITS      = ['pcs','set','day','hr','table','chair','per person','lot','m²','kg'];
