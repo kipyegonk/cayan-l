@@ -101,9 +101,7 @@ body {
 }
 .sidebar-backdrop.open { display: block; }
 
-/* ══════════════════════════════════════════════════════
-   COMMON COMPONENTS
-   ══════════════════════════════════════════════════════ */
+/* COMMON COMPONENTS */
 
 .toast {
   position: fixed; top: 16px; right: 16px; z-index: 9999;
