@@ -425,9 +425,7 @@ label {
   .qp-controls button { flex: 1; font-size: 11px; padding: 7px; }
 }
 
-/* ══════════════════════════════════════════════════════
-   SMALL PHONE (max 400px)
-   ══════════════════════════════════════════════════════ */
+/* SMALL PHONE (max 400px) */
 
 @media (max-width: 400px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
