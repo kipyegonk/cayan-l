@@ -190,7 +190,7 @@ body {
 .page-title { margin: 0; font-size: 20px; font-weight: 800; color: var(--maroon); }
 .page-subtitle { color: var(--gray); font-size: 13px; margin-top: 4px; }
 
-/* ── Stats grid ─────────────────────────────────────── */
+/* Stats grid */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
