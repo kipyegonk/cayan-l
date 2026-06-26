@@ -337,9 +337,7 @@ label {
 
 @media print { body > * { display: none !important; } }
 
-/* ══════════════════════════════════════════════════════
-   TABLET (max 1100px)
-   ══════════════════════════════════════════════════════ */
+/* TABLET (max 1100px) */
 
 @media (max-width: 1100px) {
   .sidebar { width: 190px; }
