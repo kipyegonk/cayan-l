@@ -4,74 +4,55 @@ const CAYAN_LOGO = 'https://i.imgur.com/placeholder.png'; // replaced below
 Object.assign(app, {
   renderAuth() {
     const logo = this.state.company?.logo || '';
-    return `<div class="auth-screen">
+    return `<div class="auth-screen centered">
 
-      <!-- Left panel — branding -->
-      <div class="auth-left">
-        <div class="auth-brand">
+      <div class="auth-form-center">
+
+        <!-- Logo at the very top -->
+        <div style="text-align:center; margin-bottom: 32px;">
           ${logo
-            ? '<img src="' + logo + '" alt="Logo" style="width:140px;height:auto;object-fit:contain;margin-bottom:18px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));">'
-            : '<div style="font-size:72px;margin-bottom:18px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));">🏕</div>'
+            ? '<img src="' + logo + '" alt="Cayan Events" style="width:110px;height:auto;object-fit:contain;">'
+            : '<div style="font-size:64px;margin-bottom:12px;">🏕</div>'
           }
-          <h1 class="auth-brand-name">${this.state.company?.name || 'Cayan Events Ke.'}</h1>
-          <div class="auth-divider"></div>
-          <p class="auth-brand-tagline">Professional Quote Management</p>
-          <div class="auth-features">
-            <div class="auth-feature">📄 Professional Quotations</div>
-            <div class="auth-feature">👥 Client Management</div>
-            <div class="auth-feature">📦 Item Catalog</div>
-            <div class="auth-feature">🖨 Print & Export PDF</div>
+          <div style="font-size:22px; font-weight:800; color:#760014; margin-top:8px;">
+            ${this.state.company?.name || 'Cayan Events Ke.'}
           </div>
         </div>
-      </div>
 
-      <!-- Right panel — form (Centered Login Only) -->
-      <div class="auth-right">
-        <div class="auth-form-wrap">
+        <h2 class="auth-title" style="text-align:center;">Welcome Back</h2>
+        <p class="auth-subtitle" style="text-align:center;">Sign in to continue</p>
 
-          <!-- Mobile logo -->
-          <div class="auth-mobile-logo">
-            ${logo
-              ? '<img src="' + logo + '" alt="Logo" style="width:80px;height:auto;object-fit:contain;">'
-              : '<div style="font-size:40px;">🏕</div>'
-            }
-            <div style="font-size:16px;font-weight:800;color:#760014;margin-top:6px;">${this.state.company?.name || 'Cayan Events Ke.'}</div>
-          </div>
-
-          <h2 class="auth-title">Welcome Back</h2>
-          <p class="auth-subtitle">Sign in to your account to continue.</p>
-
-          <!-- Form fields (No register fields) -->
-          <div class="auth-fields">
-            <div class="auth-field-group">
-              <label class="auth-label">Email Address</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">✉️</span>
-                <input type="email" id="auth-email" class="auth-input" placeholder="your@email.com" autocomplete="email">
-              </div>
-            </div>
-            <div class="auth-field-group">
-              <label class="auth-label">Password</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">🔒</span>
-                <input type="password" id="auth-password" class="auth-input" placeholder="Enter your password" autocomplete="current-password">
-                <button type="button" class="auth-eye-btn" onclick="
-                  const inp = document.getElementById('auth-password');
-                  inp.type = inp.type==='password' ? 'text' : 'password';
-                  this.textContent = inp.type==='password' ? '👁' : '🙈';
-                ">👁</button>
-              </div>
+        <!-- Login Form -->
+        <div class="auth-fields">
+          <div class="auth-field-group">
+            <label class="auth-label">Email Address</label>
+            <div class="auth-input-wrap">
+              <span class="auth-input-icon">✉️</span>
+              <input type="email" id="auth-email" class="auth-input" placeholder="your@email.com" autocomplete="email">
             </div>
           </div>
-
-          <button id="auth-submit" class="auth-submit-btn">
-            Sign In <span style="margin-left:6px;">→</span>
-          </button>
-
-          <div class="auth-hint">
-            <span>🔑</span> Default: <strong>admin@company.com</strong> / <strong>admin123</strong>
+          <div class="auth-field-group">
+            <label class="auth-label">Password</label>
+            <div class="auth-input-wrap">
+              <span class="auth-input-icon">🔒</span>
+              <input type="password" id="auth-password" class="auth-input" placeholder="Enter your password" autocomplete="current-password">
+              <button type="button" class="auth-eye-btn" onclick="
+                const inp = document.getElementById('auth-password');
+                inp.type = inp.type==='password' ? 'text' : 'password';
+                this.textContent = inp.type==='password' ? '👁' : '🙈';
+              ">👁</button>
+            </div>
           </div>
         </div>
+
+        <button id="auth-submit" class="auth-submit-btn">
+          Sign In <span style="margin-left:6px;">→</span>
+        </button>
+
+        <div class="auth-hint" style="text-align:center;">
+          <span>🔑</span> Default: <strong>admin@company.com</strong> / <strong>admin123</strong>
+        </div>
+
       </div>
     </div>`;
 },

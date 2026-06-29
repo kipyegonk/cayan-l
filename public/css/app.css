@@ -515,8 +515,8 @@ label {
   .main { padding: 56px 10px 20px; }
 }
 
-/* Make the whole auth screen centered */
-.auth-screen {
+/* Full centered login */
+.auth-screen.centered {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -525,40 +525,16 @@ label {
     padding: 20px;
 }
 
-/* Left branding panel (keep or make optional) */
-.auth-left {
-    flex: 1;
-    max-width: 520px;
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(150deg, #760014 0%, #3a0009 60%, #1a0004 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 48px 40px;
-    color: #fff;
-    border-radius: 16px 0 0 16px;
-}
-
-/* Right form panel - centered and cleaner */
-.auth-right {
+.auth-form-center {
     width: 100%;
     max-width: 420px;
     background: #fff;
     border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-}
-
-/* Form wrapper */
-.auth-form-wrap {
+    box-shadow: 0 15px 50px rgba(118, 0, 20, 0.15);
     padding: 48px 44px;
 }
 
-/* Remove tabs completely since we removed register */
-.auth-tabs {
-    display: none;
+/* Make sure form elements still look good */
+.auth-title, .auth-subtitle {
+    margin-bottom: 28px;
 }
