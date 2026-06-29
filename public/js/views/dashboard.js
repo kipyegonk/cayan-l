@@ -8,17 +8,7 @@ Object.assign(app, {
 
       <div class="auth-form-center">
 
-        <!-- Logo at the very top -->
-        <div style="text-align:center; margin-bottom: 32px;">
-          ${logo
-            ? '<img src="' + logo + '" alt="Cayan Events" style="width:110px;height:auto;object-fit:contain;">'
-            : '<div style="font-size:64px;margin-bottom:12px;">🏕</div>'
-          }
-          <div style="font-size:22px; font-weight:800; color:#760014; margin-top:8px;">
-            ${this.state.company?.name || 'Cayan Events Ke.'}
-          </div>
-        </div>
-
+       
         <h2 class="auth-title" style="text-align:center;">Welcome Back</h2>
         <p class="auth-subtitle" style="text-align:center;">Sign in to continue</p>
 
