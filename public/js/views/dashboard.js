@@ -65,15 +65,15 @@ Object.assign(app, {
     return `<div class="container">
       <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
       <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
-      <aside class="sidebar" id="app-sidebar">
+      <aside class="sidebar collapsed" id="app-sidebar">
         <div class="sidebar-header">
-          ${logo ? `<img src="${logo}" alt="Logo" style="width:80px;height:auto;object-fit:contain;display:block;margin-bottom:6px;">` : '<div class="logo">🏕</div>'}
+          ${logo ? `<img src="${logo}" alt="Logo" style="width:64px;height:auto;object-fit:contain;display:block;margin-bottom:6px;">` : '<div class="logo">🏕</div>'}
           <div class="company-name">${this.state.company?.name || 'Cayan Events Ke.'}</div>
           <div class="user-name">${this.state.user?.name || ''}</div>
           <div class="role-badge">${(this.state.user?.role || '').toUpperCase()}</div>
         </div>
-        <nav>${navItems.map(i => `<button class="nav-item ${this.state.view === i.id ? 'active' : ''}" data-view="${i.id}"><span>${i.emoji}</span>${i.label}</button>`).join('')}</nav>
-        <div class="sidebar-footer"><button id="logout-btn" class="logout-btn">🚪 Sign Out</button></div>
+        <nav>${navItems.map(i => `<button class="nav-item ${this.state.view === i.id ? 'active' : ''}" data-view="${i.id}" title="${i.label}"><span>${i.emoji}</span><span class="nav-label">${i.label}</span></button>`).join('')}</nav>
+        <div class="sidebar-footer"><button id="logout-btn" class="logout-btn" title="Sign Out">🚪 <span class="nav-label">Sign Out</span></button></div>
       </aside>
       <main class="main">${this.renderViewContent()}</main>
     </div>`;

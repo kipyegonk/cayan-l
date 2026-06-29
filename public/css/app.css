@@ -47,8 +47,37 @@ img, svg { max-width: 100%; height: auto; }
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  transition: transform 0.3s ease;
+  transition: width 0.2s ease, transform 0.3s ease;
   z-index: 100;
+}
+
+.sidebar.collapsed {
+  width: 64px;
+}
+
+.sidebar.collapsed .sidebar-header .company-name,
+.sidebar.collapsed .sidebar-header .user-name,
+.sidebar.collapsed .sidebar-header .role-badge,
+.sidebar.collapsed .nav-label,
+.sidebar.collapsed .logout-btn .nav-label {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-header {
+  padding: 12px 8px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar.collapsed .nav-item,
+.sidebar.collapsed .logout-btn {
+  justify-content: center;
+  padding: 10px 8px;
+}
+
+.sidebar.collapsed .nav-item {
+  gap: 0;
 }
 
 .sidebar-header {
@@ -459,6 +488,10 @@ label {
     box-shadow: 4px 0 24px rgba(0,0,0,0.3);
   }
   .sidebar.open { transform: translateX(0); }
+  .sidebar.collapsed {
+    width: 64px;
+    transform: translateX(0);
+  }
 
   /* Full width main, room for hamburger */
   .main { padding: 62px 12px 24px; width: 100%; overflow-x: hidden; }

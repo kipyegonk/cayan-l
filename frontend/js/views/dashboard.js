@@ -62,10 +62,10 @@ renderAuth() {
       { id: 'settings',  emoji: '⚙️', label: 'Settings' },
     ];
     return `<div class="container">
-      <aside class="sidebar">
+      <aside class="sidebar collapsed">
         <div class="sidebar-header">
           ${this.state.company.logo
-            ? '<img src="' + this.state.company.logo + '" alt="Logo" style="width:80px;height:auto;object-fit:contain;display:block;margin-bottom:6px;border-radius:4px;">'
+            ? '<img src="' + this.state.company.logo + '" alt="Logo" style="width:64px;height:auto;object-fit:contain;display:block;margin-bottom:6px;border-radius:4px;">'
             : '<div class="logo">📋</div>'
           }
           <div class="company-name">${this.state.company.name || 'QuoteSystem'}</div>
@@ -73,8 +73,8 @@ renderAuth() {
           <div class="role-badge">${(this.state.user?.role || '').toUpperCase()}</div>
           ${OFFLINE ? '<div style="background:#D97706;color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;margin-top:6px;text-align:center;">⚡ OFFLINE MODE</div>' : ''}
         </div>
-        <nav>${navItems.map(i => `<button class="nav-item ${this.state.view === i.id ? 'active' : ''}" data-view="${i.id}"><span>${i.emoji}</span>${i.label}</button>`).join('')}</nav>
-        <div class="sidebar-footer"><button id="logout-btn" class="logout-btn">🚪 Sign Out</button></div>
+        <nav>${navItems.map(i => `<button class="nav-item ${this.state.view === i.id ? 'active' : ''}" data-view="${i.id}" title="${i.label}"><span>${i.emoji}</span><span class="nav-label">${i.label}</span></button>`).join('')}</nav>
+        <div class="sidebar-footer"><button id="logout-btn" class="logout-btn" title="Sign Out">🚪 <span class="nav-label">Sign Out</span></button></div>
       </aside>
       <main class="main">${this.renderViewContent()}</main>
     </div>`;
