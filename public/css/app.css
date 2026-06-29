@@ -1,4 +1,4 @@
-/* ── Cayan Events Ke. — Quote System Styles ──────────────────── */
+/* Cayan Events Ke. — Quote System Styles */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -21,9 +21,7 @@ body {
   min-height: 100vh;
 }
 
-/* ══════════════════════════════════════════════════════
-   APP SHELL
-   ══════════════════════════════════════════════════════ */
+/* APP SHELL */
 
 .container {
   display: flex;
@@ -32,7 +30,7 @@ body {
   position: relative;
 }
 
-/* ── Sidebar ─────────────────────────────────────────── */
+/* Sidebar */
 .sidebar {
   width: 220px;
   background: var(--maroon);
