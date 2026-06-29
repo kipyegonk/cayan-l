@@ -52,6 +52,30 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .loader-text { font-weight: 700; font-size: 18px; }
 .auth-screen { min-height: 100vh; display: flex; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
 
+/* When using the simplified auth layout (single centered login card) */
+.auth-screen.clean {
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--bg);
+}
+
+/* Login card used by simplified auth view */
+.login-box {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  padding: 36px 28px;
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(118,0,20,0.08);
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 480px) {
+  .login-box { padding: 20px; margin: 8px; }
+  .auth-title { font-size: 20px; }
+}
+
 /* Left branding panel */
 .auth-left {
   flex: 1; position: relative; overflow: hidden;
