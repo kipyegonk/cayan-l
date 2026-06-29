@@ -5,8 +5,8 @@ Object.assign(app, {
  renderAuth() {
     const storedCompany = (function(){ try { return JSON.parse(localStorage.getItem('cayan_company') || 'null'); } catch(e){ return null; } })();
     const logo = this.state.company?.logo || storedCompany?.logo || (typeof CAYAN_LOGO_B64 !== 'undefined' ? CAYAN_LOGO_B64 : '');
-    return `<div class="auth-screen clean">
-      <div class="login-box">
+    return `<div class="auth-screen clean" style="background: linear-gradient(145deg, #760014 0%, #4a000d 100%); min-height: 100vh;">
+      <div class="login-box" style="background: #fff;">
         <div style="display:flex;justify-content:center;margin-bottom:16px;">
           ${logo
             ? `<img src="${logo}" alt="Cayan logo" style="max-width:140px;max-height:72px;object-fit:contain;">`
