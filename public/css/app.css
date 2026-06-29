@@ -494,7 +494,7 @@ label {
   }
 
   /* Full width main, room for hamburger */
-  .main { padding: 62px 12px 24px; width: 100%; overflow-x: hidden; }
+  .main { padding: 62px 10px 24px; width: 100%; overflow-x: auto; min-width: 320px; }
 
   /* Auth — centered and responsive on mobile */
   .auth-screen { padding: 16px; align-items: center; justify-content: center; padding-top: 20px; min-height: 100vh; }
@@ -521,7 +521,7 @@ label {
   .stat-label { font-size: 9px; }
 
   /* Cards */
-  .card { padding: 12px; border-radius: 10px; }
+  .card { padding: 12px; border-radius: 10px; min-width: 0; }
 
   /* HIDE desktop table, SHOW mobile cards */
   .desktop-table { display: none !important; }
@@ -569,7 +569,7 @@ label {
   .stat-value { font-size: 14px; }
   .page-title { font-size: 15px; }
   .button { font-size: 12px; padding: 8px 12px; }
-  .main { padding: 56px 10px 20px; }
+  .main { padding: 56px 8px 20px; min-width: 280px; }
   .page-header { gap: 8px; }
   .mobile-card-row .mcr-row { flex-direction: column; align-items: flex-start; gap: 2px; }
 }
