@@ -2,12 +2,12 @@
 const CAYAN_LOGO = 'https://i.imgur.com/placeholder.png'; // replaced below
 
 Object.assign(app, {
-  renderAuth() {
-    return `<div class="auth-screen minimal">
+ renderAuth() {
+    return `<div class="auth-screen clean">
 
       <div class="login-box">
 
-        <h2 class="auth-title" style="text-align:center; margin-bottom: 32px;">Sign In</h2>
+        <h2 class="auth-title">Sign In</h2>
 
         <div class="auth-fields">
           <div class="auth-field-group">
@@ -22,7 +22,7 @@ Object.assign(app, {
             <label class="auth-label">Password</label>
             <div class="auth-input-wrap">
               <span class="auth-input-icon">🔒</span>
-              <input type="password" id="auth-password" class="auth-input" placeholder="Enter password" autocomplete="current-password">
+              <input type="password" id="auth-password" class="auth-input" placeholder="Enter your password" autocomplete="current-password">
               <button type="button" class="auth-eye-btn" onclick="
                 const inp = document.getElementById('auth-password');
                 inp.type = inp.type==='password' ? 'text' : 'password';
@@ -39,7 +39,6 @@ Object.assign(app, {
       </div>
     </div>`;
 },
-
   renderAppShell() {
     const navItems = [
       { id: 'dashboard', emoji: '⊞', label: 'Dashboard' },
