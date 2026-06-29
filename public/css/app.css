@@ -515,9 +515,7 @@ label {
   .main { padding: 56px 10px 20px; }
 }
 
-/* ═══════════════════════════════════════
-   LOGIN PAGE — centered, logo on top
-   ═══════════════════════════════════════ */
+/* LOGIN PAGE — centered, logo on top */
 .auth-screen {
   min-height: 100vh;
   display: flex;

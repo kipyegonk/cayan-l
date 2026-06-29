@@ -1,4 +1,4 @@
-// ── Views: Auth, Dashboard, Quotes List ─────────────────────────
+// Views: Auth, Dashboard, Quotes List 
 const CAYAN_LOGO = 'https://i.imgur.com/placeholder.png'; // replaced below
 
 Object.assign(app, {
