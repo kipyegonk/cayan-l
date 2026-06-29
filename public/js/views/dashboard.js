@@ -3,28 +3,18 @@ const CAYAN_LOGO = 'https://i.imgur.com/placeholder.png'; // replaced below
 
 Object.assign(app, {
   renderAuth() {
-    const logo = this.state.company?.logo || '';
     return `<div class="auth-screen minimal">
 
       <div class="login-box">
 
-        <!-- Logo -->
-        <div style="text-align: center; margin-bottom: 32px;">
-          ${logo
-            ? `<img src="${logo}" alt="Cayan Events" style="width: 100px; height: auto;">`
-            : `<div style="font-size: 52px;">🏕</div>`
-          }
-        </div>
-
-        <h2 class="auth-title" style="text-align:center; margin-bottom: 8px;">Sign In</h2>
-        <p class="auth-subtitle" style="text-align:center; margin-bottom: 32px;">Enter your credentials to continue</p>
+        <h2 class="auth-title" style="text-align:center; margin-bottom: 32px;">Sign In</h2>
 
         <div class="auth-fields">
           <div class="auth-field-group">
-            <label class="auth-label">Email</label>
+            <label class="auth-label">Email Address</label>
             <div class="auth-input-wrap">
               <span class="auth-input-icon">✉️</span>
-              <input type="email" id="auth-email" class="auth-input" placeholder="your@email.com">
+              <input type="email" id="auth-email" class="auth-input" placeholder="your@email.com" autocomplete="email">
             </div>
           </div>
 
@@ -32,11 +22,11 @@ Object.assign(app, {
             <label class="auth-label">Password</label>
             <div class="auth-input-wrap">
               <span class="auth-input-icon">🔒</span>
-              <input type="password" id="auth-password" class="auth-input" placeholder="••••••••">
+              <input type="password" id="auth-password" class="auth-input" placeholder="Enter password" autocomplete="current-password">
               <button type="button" class="auth-eye-btn" onclick="
                 const inp = document.getElementById('auth-password');
-                inp.type = inp.type === 'password' ? 'text' : 'password';
-                this.textContent = inp.type === 'password' ? '👁' : '🙈';
+                inp.type = inp.type==='password' ? 'text' : 'password';
+                this.textContent = inp.type==='password' ? '👁' : '🙈';
               ">👁</button>
             </div>
           </div>
