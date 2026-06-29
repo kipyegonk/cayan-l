@@ -29,6 +29,19 @@ Object.assign(app, {
   },
 
   bindEvents() {
+    // Delegated nav handler (attach once) — handles clicks even if per-item listeners miss
+    if (!document.__app_nav_delegated) {
+      document.__app_nav_delegated = true;
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.nav-item, [data-view]');
+        if (!btn) return;
+        const view = btn.dataset?.view;
+        if (!view) return;
+        try { this.setView(view); } catch(err) { if (window.app && typeof window.app.setView === 'function') window.app.setView(view); }
+        document.getElementById('app-sidebar')?.classList.remove('open');
+        document.getElementById('sidebar-backdrop')?.classList.remove('open');
+      });
+    }
     // Auth 
 
     document.getElementById('auth-submit')?.addEventListener('click', async () => {

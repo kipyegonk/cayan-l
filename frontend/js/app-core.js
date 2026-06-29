@@ -82,3 +82,6 @@ const app = {
     this.bindEvents();
   }
 };
+
+// Expose to window for inline handlers (onclick="app.setView(...)")
+try { window.app = app; } catch(e) { /* non-browser env */ }

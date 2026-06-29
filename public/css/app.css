@@ -445,11 +445,17 @@ label {
   /* Full width main, room for hamburger */
   .main { padding: 62px 12px 24px; width: 100%; }
 
-  /* Auth — centered on mobile too */
-  .auth-screen { padding: 16px; align-items: flex-start; padding-top: 40px; }
+  /* Auth — centered and responsive on mobile */
+  .auth-screen { padding: 16px; align-items: center; justify-content: center; padding-top: 20px; min-height: 100vh; }
+  .login-box { width: 100%; max-width: 420px; padding: 22px; border-radius: 12px; margin: 8px; }
   .auth-logo-img { width: 110px; }
   .auth-company-name { font-size: 15px; }
   .auth-card { padding: 24px 20px; }
+  .auth-title { font-size: 20px; }
+  .auth-field-group { margin-bottom: 12px; }
+  .auth-input, .auth-input-wrap input, .auth-input-wrap textarea { font-size: 15px; }
+  .auth-input-wrap { display: flex; align-items: center; gap: 8px; }
+  .auth-eye-btn { padding: 6px 8px; }
 
   /* Page header */
   .page-header { flex-direction: column; align-items: stretch; gap: 10px; }
@@ -513,6 +519,14 @@ label {
   .page-title { font-size: 15px; }
   .button { font-size: 12px; padding: 8px 12px; }
   .main { padding: 56px 10px 20px; }
+}
+
+/* Extra small screens: tighten the auth card so it never overflows */
+@media (max-width: 360px) {
+  .login-box { padding: 14px; border-radius: 10px; }
+  .auth-title { font-size: 18px; }
+  .auth-submit-btn { padding: 11px; font-size: 15px; }
+  .auth-input, .auth-input-wrap input { font-size: 14px; }
 }
 
 .auth-screen.minimal {
