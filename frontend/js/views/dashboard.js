@@ -2,96 +2,37 @@
 
 Object.assign(app, {
 renderAuth() {
-    const m    = this.state.authMode;
-    const logo = this.state.company?.logo || '';
-    return `<div class="auth-screen">
+    return `<div class="auth-screen clean">
+      <div class="login-box">
+        <h2 class="auth-title">Sign In</h2>
 
-      <!-- Left panel — branding -->
-      <div class="auth-left">
-        <div class="auth-brand">
-          ${logo
-            ? '<img src="' + logo + '" alt="Logo" style="width:140px;height:auto;object-fit:contain;margin-bottom:18px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));">'
-            : '<div style="font-size:72px;margin-bottom:18px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));">🏕</div>'
-          }
-          <h1 class="auth-brand-name">${this.state.company?.name || 'Cayan Events Ke.'}</h1>
-          <div class="auth-divider"></div>
-          <p class="auth-brand-tagline">Professional Quote Management</p>
-          <div class="auth-features">
-            <div class="auth-feature">📄 Professional Quotations</div>
-            <div class="auth-feature">👥 Client Management</div>
-            <div class="auth-feature">📦 Item Catalog</div>
-            <div class="auth-feature">🖨 Print & Export PDF</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right panel — form -->
-      <div class="auth-right">
-        <div class="auth-form-wrap">
-          <!-- Mobile logo -->
-          <div class="auth-mobile-logo">
-            ${logo
-              ? '<img src="' + logo + '" alt="Logo" style="width:80px;height:auto;object-fit:contain;">'
-              : '<div style="font-size:40px;">🏕</div>'
-            }
-            <div style="font-size:16px;font-weight:800;color:#760014;margin-top:6px;">${this.state.company?.name || 'Cayan Events Ke.'}</div>
-          </div>
-
-          <h2 class="auth-title">${m === 'login' ? 'Welcome Back' : 'Create Account'}</h2>
-          <p class="auth-subtitle">${m === 'login' ? 'Sign in to your account to continue.' : 'Register to request access.'}</p>
-
-          <!-- Mode tabs -->
-          <div class="auth-tabs">
-            <button class="auth-tab ${m==='login'?'active':''}" data-mode="login">Sign In</button>
-            <button class="auth-tab ${m==='register'?'active':''}" data-mode="register">Register</button>
-          </div>
-
-          <!-- Form fields -->
-          <div class="auth-fields">
-            ${m === 'register' ? `
-            <div class="auth-field-group">
-              <label class="auth-label">Full Name</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">👤</span>
-                <input type="text" id="reg-name" class="auth-input" placeholder="Your full name" autocomplete="name">
-              </div>
-            </div>` : ''}
-            <div class="auth-field-group">
-              <label class="auth-label">Email Address</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">✉️</span>
-                <input type="email" id="auth-email" class="auth-input" placeholder="your@email.com" autocomplete="email">
-              </div>
-            </div>
-            <div class="auth-field-group">
-              <label class="auth-label">Password</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">🔒</span>
-                <input type="password" id="auth-password" class="auth-input" placeholder="Enter your password" autocomplete="current-password">
-                <button type="button" class="auth-eye-btn" onclick="
-                  const inp = document.getElementById('auth-password');
-                  inp.type = inp.type==='password' ? 'text' : 'password';
-                  this.textContent = inp.type==='password' ? '👁' : '🙈';
-                ">👁</button>
-              </div>
+        <div class="auth-fields">
+          <div class="auth-field-group">
+            <label class="auth-label">Email Address</label>
+            <div class="auth-input-wrap">
+              <span class="auth-input-icon">✉️</span>
+              <input type="email" id="auth-email" class="auth-input" placeholder="your@email.com" autocomplete="email">
             </div>
           </div>
 
-          <button id="auth-submit" class="auth-submit-btn">
-            ${m === 'login' ? 'Sign In' : 'Submit Registration'}
-            <span style="margin-left:6px;">→</span>
-          </button>
-
-          ${m === 'login' ? `
-          <div class="auth-hint">
-            <span>🔑</span> Default: <strong>admin@company.com</strong> / <strong>admin123</strong>
-          </div>` : `
-          <div class="auth-hint">
-            <span>ℹ️</span> Your account needs admin approval before you can log in.
-          </div>`}
+          <div class="auth-field-group">
+            <label class="auth-label">Password</label>
+            <div class="auth-input-wrap">
+              <span class="auth-input-icon">🔒</span>
+              <input type="password" id="auth-password" class="auth-input" placeholder="Enter your password" autocomplete="current-password">
+              <button type="button" class="auth-eye-btn" onclick="
+                const inp = document.getElementById('auth-password');
+                inp.type = inp.type==='password' ? 'text' : 'password';
+                this.textContent = inp.type==='password' ? '👁' : '🙈';
+              ">👁</button>
+            </div>
+          </div>
         </div>
-      </div>
 
+        <button id="auth-submit" class="auth-submit-btn">
+          Sign In
+        </button>
+      </div>
     </div>`;
   },
 

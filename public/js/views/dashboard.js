@@ -4,9 +4,7 @@ const CAYAN_LOGO = 'https://i.imgur.com/placeholder.png'; // replaced below
 Object.assign(app, {
  renderAuth() {
     return `<div class="auth-screen clean">
-
       <div class="login-box">
-
         <h2 class="auth-title">Sign In</h2>
 
         <div class="auth-fields">
@@ -35,7 +33,6 @@ Object.assign(app, {
         <button id="auth-submit" class="auth-submit-btn">
           Sign In
         </button>
-
       </div>
     </div>`;
 },
