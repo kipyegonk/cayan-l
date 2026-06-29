@@ -30,20 +30,12 @@ Object.assign(app, {
 
   bindEvents() {
     // Auth 
-    document.querySelectorAll('.auth-tab, .auth-mode-btn').forEach(b => b.addEventListener('click', (e) => {
-      this.state.authMode = e.currentTarget.dataset.mode; this.render();
-    }));
+
     document.getElementById('auth-submit')?.addEventListener('click', async () => {
-      const email = document.getElementById('auth-email')?.value;
+      const email    = document.getElementById('auth-email')?.value;
       const password = document.getElementById('auth-password')?.value;
-      if (this.state.authMode === 'login') {
-        if (!email || !password) { this.notify('Enter email and password', 'error'); return; }
-        await this.handleLogin(email, password);
-      } else {
-        const name = document.getElementById('reg-name')?.value;
-        if (!name || !email || !password) { this.notify('All fields required', 'error'); return; }
-        await this.handleRegister(name, email, password);
-      }
+      if (!email || !password) { this.notify('Enter email and password', 'error'); return; }
+      await this.handleLogin(email, password);
     });
 
     // Nav 
