@@ -21,18 +21,18 @@ html, body { width: 100%; overflow-x: hidden; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: #111; overflow-x: hidden; }
 img, svg { max-width: 100%; height: auto; }
 .container { display: flex; height: 100vh; overflow: hidden; width: 100%; max-width: 100vw; }
-.sidebar { width: 220px; background: #760014; display: flex; flex-direction: column; flex-shrink: 0; }
-.sidebar-header { padding: 22px 20px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); color: #fff; }
-.sidebar-header .logo { font-size: 22px; margin-bottom: 6px; }
-.sidebar-header .company-name { font-weight: 700; font-size: 14px; line-height: 1.3; margin-bottom: 4px; }
-.sidebar-header .user-name { color: rgba(255,255,255,0.45); font-size: 11px; margin-top: 6px; }
-.sidebar-header .role-badge { display: inline-block; background: #D0A95E; color: #760014; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 20px; margin-top: 4px; letter-spacing: 0.06em; }
-.sidebar nav { flex: 1; padding: 10px 0; overflow-y: auto; }
-.nav-item { width: 100%; display: flex; align-items: center; gap: 10px; padding: 10px 20px; border: none; border-left: 3px solid transparent; background: transparent; color: rgba(255,255,255,0.55); font-size: 13px; font-weight: 400; cursor: pointer; text-align: left; transition: all 0.15s; }
+.sidebar { width: 200px; background: #760014; display: flex; flex-direction: column; flex-shrink: 0; }
+.sidebar-header { padding: 14px 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.08); color: #fff; }
+.sidebar-header .logo { font-size: 20px; margin-bottom: 4px; }
+.sidebar-header .company-name { font-weight: 700; font-size: 12px; line-height: 1.25; margin-bottom: 4px; }
+.sidebar-header .user-name { color: rgba(255,255,255,0.45); font-size: 10px; margin-top: 3px; }
+.sidebar-header .role-badge { display: inline-block; background: #D0A95E; color: #760014; font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 20px; margin-top: 3px; letter-spacing: 0.05em; }
+.sidebar nav { flex: 1; padding: 6px 0; overflow-y: auto; }
+.nav-item { width: 100%; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: none; border-left: 3px solid transparent; background: transparent; color: rgba(255,255,255,0.55); font-size: 12px; font-weight: 400; cursor: pointer; text-align: left; transition: all 0.15s; }
 .nav-item:hover { background: rgba(255,255,255,0.08); }
 .nav-item.active { border-left-color: #D0A95E; background: rgba(208,169,94,0.15); color: #D0A95E; font-weight: 700; }
-.sidebar-footer { padding: 14px 16px; border-top: 1px solid rgba(255,255,255,0.08); }
-.logout-btn { width: 100%; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid rgba(208,169,94,0.3); background: transparent; color: #D0A95E; font-size: 12px; cursor: pointer; border-radius: 7px; transition: all 0.15s; }
+.sidebar-footer { padding: 10px 12px; border-top: 1px solid rgba(255,255,255,0.08); }
+.logout-btn { width: 100%; display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid rgba(208,169,94,0.3); background: transparent; color: #D0A95E; font-size: 11px; cursor: pointer; border-radius: 7px; transition: all 0.15s; }
 .main { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 28px; width: 100%; min-width: 0; }
 .toast { position: fixed; top: 20px; right: 20px; z-index: 9999; padding: 12px 22px; border-radius: 9px; color: #fff; font-weight: 600; font-size: 13px; box-shadow: 0 6px 20px rgba(0,0,0,0.18); animation: slideIn 0.3s ease-out; }
 .toast.success { background: var(--green); }
