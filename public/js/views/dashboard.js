@@ -1,4 +1,4 @@
-// ── Views: Auth, Dashboard, Quotes List ────────────────────────
+// Views: Auth, Dashboard, Quotes List
 // These methods are mixed into the app object in app-core.js
 
 Object.assign(app, {
