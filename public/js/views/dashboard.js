@@ -3,8 +3,23 @@ const CAYAN_LOGO = 'https://i.imgur.com/placeholder.png'; // replaced below
 
 Object.assign(app, {
  renderAuth() {
+    const storedCompany = (function(){ try { return JSON.parse(localStorage.getItem('cayan_company') || 'null'); } catch(e){ return null; } })();
+    const logo = this.state.company?.logo || storedCompany?.logo || (typeof CAYAN_LOGO_B64 !== 'undefined' ? CAYAN_LOGO_B64 : '');
     return `<div class="auth-screen clean">
       <div class="login-box">
+        <div style="display:flex;justify-content:center;margin-bottom:16px;">
+          ${logo
+            ? `<img src="${logo}" alt="Cayan logo" style="max-width:140px;max-height:72px;object-fit:contain;">`
+            : `<svg width="140" height="72" viewBox="0 0 240 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="60" height="60" rx="16" fill="#760014"/>
+                <path d="M38 26C38 24.3431 39.3431 23 41 23H50C51.6569 23 53 24.3431 53 26V54C53 55.6569 51.6569 57 50 57H41C39.3431 57 38 55.6569 38 54V26Z" fill="#D0A95E"/>
+                <path d="M42 31V50" stroke="#760014" stroke-width="4" stroke-linecap="round"/>
+                <path d="M45 31H51" stroke="#760014" stroke-width="4" stroke-linecap="round"/>
+                <path d="M84 26H122" stroke="#760014" stroke-width="8" stroke-linecap="round"/>
+                <path d="M84 42H116" stroke="#760014" stroke-width="8" stroke-linecap="round"/>
+                <path d="M84 58H108" stroke="#760014" stroke-width="8" stroke-linecap="round"/>
+              </svg>`}
+        </div>
         <h2 class="auth-title">Sign In</h2>
 
         <div class="auth-fields">
