@@ -64,7 +64,10 @@ renderAuth() {
     return `<div class="container">
       <aside class="sidebar">
         <div class="sidebar-header">
-          <div class="logo">📋</div>
+          ${this.state.company.logo
+            ? '<img src="' + this.state.company.logo + '" alt="Logo" style="width:48px;height:auto;object-fit:contain;display:block;margin-bottom:6px;border-radius:4px;">'
+            : '<div class="logo">📋</div>'
+          }
           <div class="company-name">${this.state.company.name || 'QuoteSystem'}</div>
           <div class="user-name">${this.state.user?.name || ''}</div>
           <div class="role-badge">${(this.state.user?.role || '').toUpperCase()}</div>
