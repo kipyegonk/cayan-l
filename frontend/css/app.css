@@ -21,7 +21,7 @@ html, body { width: 100%; overflow-x: hidden; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: #111; overflow-x: hidden; }
 img, svg { max-width: 100%; height: auto; }
 .container { display: flex; height: 100vh; overflow: hidden; width: 100%; max-width: 100vw; }
-.sidebar { width: 200px; background: #760014; display: flex; flex-direction: column; flex-shrink: 0; transition: width 0.2s ease; }
+.sidebar { width: 240px; background: #760014; display: flex; flex-direction: column; flex-shrink: 0; transition: width 0.2s ease; }
 .sidebar.collapsed { width: 64px; }
 .sidebar.collapsed .sidebar-header .company-name,
 .sidebar.collapsed .sidebar-header .user-name,

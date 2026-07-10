@@ -1,8 +1,7 @@
 // Views: Auth, Dashboard, Quotes List 
-const CAYAN_LOGO = 'https://i.imgur.com/placeholder.png'; // replaced below
 
 Object.assign(app, {
- renderAuth() {
+renderAuth() {
     const storedCompany = (function(){ try { return JSON.parse(localStorage.getItem('cayan_company') || 'null'); } catch(e){ return null; } })();
     const logo = this.state.company?.logo || storedCompany?.logo || (typeof CAYAN_LOGO_B64 !== 'undefined' ? CAYAN_LOGO_B64 : '');
     return `<div class="auth-screen clean" style="background: linear-gradient(145deg, #760014 0%, #4a000d 100%); min-height: 100vh;">
@@ -50,7 +49,8 @@ Object.assign(app, {
         </button>
       </div>
     </div>`;
-},
+  },
+
   renderAppShell() {
     const navItems = [
       { id: 'dashboard', emoji: '⊞', label: 'Dashboard' },
@@ -61,16 +61,17 @@ Object.assign(app, {
       ...(this.state.user?.role === 'admin' ? [{ id: 'users', emoji: '🔑', label: 'Users' }] : []),
       { id: 'settings',  emoji: '⚙️', label: 'Settings' },
     ];
-    const logo = this.state.company?.logo || '';
     return `<div class="container">
-      <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
-      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
-      <aside class="sidebar collapsed" id="app-sidebar">
+      <aside class="sidebar">
         <div class="sidebar-header">
-          ${logo ? `<img src="${logo}" alt="Logo" style="width:64px;height:auto;object-fit:contain;display:block;margin-bottom:6px;">` : '<div class="logo">🏕</div>'}
-          <div class="company-name">${this.state.company?.name || 'Cayan Events Ke.'}</div>
+          ${this.state.company.logo
+            ? '<img src="' + this.state.company.logo + '" alt="Logo" style="width:64px;height:auto;object-fit:contain;display:block;margin-bottom:6px;border-radius:4px;">'
+            : '<div class="logo">📋</div>'
+          }
+          <div class="company-name">${this.state.company.name || 'QuoteSystem'}</div>
           <div class="user-name">${this.state.user?.name || ''}</div>
           <div class="role-badge">${(this.state.user?.role || '').toUpperCase()}</div>
+          ${OFFLINE ? '<div style="background:#D97706;color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;margin-top:6px;text-align:center;">⚡ OFFLINE MODE</div>' : ''}
         </div>
         <nav>${navItems.map(i => `<button class="nav-item ${this.state.view === i.id ? 'active' : ''}" data-view="${i.id}" title="${i.label}"><span>${i.emoji}</span><span class="nav-label">${i.label}</span></button>`).join('')}</nav>
         <div class="sidebar-footer"><button id="logout-btn" class="logout-btn" title="Sign Out">🚪 <span class="nav-label">Sign Out</span></button></div>
@@ -96,78 +97,56 @@ Object.assign(app, {
     const s = this.state.stats || {};
     return `<div style="max-width:1100px;">
       <div class="page-header">
-        <div><h2 class="page-title">Dashboard</h2>
-        <p class="page-subtitle">Overview of your quotation activity</p></div>
+        <div><h2 class="page-title">Dashboard</h2><p class="page-subtitle">Overview of your quotation activity</p></div>
         <button class="button" onclick="app.setView('newquote')">+ New Quote</button>
       </div>
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-icon">📄</div><div class="stat-label">Total Quotes</div><div class="stat-value">${s.total_quotes||0}</div></div>
-        <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Total Value</div><div class="stat-value" style="font-size:13px;">KES ${Number(s.total_value||0).toLocaleString()}</div></div>
-        <div class="stat-card"><div class="stat-icon">⏳</div><div class="stat-label">Pending</div><div class="stat-value">${s.pending||0}</div></div>
-        <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-label">Accepted</div><div class="stat-value">${s.accepted||0}</div></div>
-        <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Clients</div><div class="stat-value">${s.clients||0}</div></div>
+        <div class="stat-card"><div class="stat-icon">📄</div><div class="stat-label">Total Quotes</div><div class="stat-value">${s.total_quotes || 0}</div></div>
+        <div class="stat-card" style="border-top-color:var(--green);"><div class="stat-icon">💰</div><div class="stat-label">Total Value</div><div class="stat-value" style="font-size:15px;">${helpers.formatMoney(s.total_value, this.state.company.currency)}</div></div>
+        <div class="stat-card" style="border-top-color:var(--amber);"><div class="stat-icon">⏳</div><div class="stat-label">Pending</div><div class="stat-value">${s.pending || 0}</div></div>
+        <div class="stat-card" style="border-top-color:var(--green);"><div class="stat-icon">✅</div><div class="stat-label">Accepted</div><div class="stat-value">${s.accepted || 0}</div></div>
+        <div class="stat-card" style="border-top-color:#7C3AED;"><div class="stat-icon">👥</div><div class="stat-label">Clients</div><div class="stat-value">${s.clients || 0}</div></div>
       </div>
       <div class="card">
         <h3 style="margin-bottom:14px;font-size:15px;font-weight:800;">Recent Quotes</h3>
-        ${this.renderQuotesTable((this.state.quotes||[]).slice(0,5))}
+        ${this.renderQuotesTable(this.state.quotes.slice(0, 5))}
       </div>
     </div>`;
   },
 
   renderQuotesList() {
-    const quotes = this.state.quotes || [];
-    const fmt = n => 'KES ' + Number(n||0).toLocaleString('en',{minimumFractionDigits:2});
-    const statusColor = {draft:'#6B7280',pending:'#D97706',accepted:'#059669',declined:'#DC2626'};
-    const badge = q => `<span style="background:${statusColor[q.status]||'#6B7280'}22;color:${statusColor[q.status]||'#6B7280'};padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;">${q.status||'draft'}</span>`;
-    const desktopRows = quotes.map(q => `<tr>
-      <td><strong>${q.number||''}</strong></td>
-      <td>${q.client_name||''}</td><td>${q.venue||'—'}</td>
-      <td>${q.quote_date||''}</td>
-      <td><strong>${fmt(q.total)}</strong></td>
-      <td>${badge(q)}</td>
-      <td><button class="button secondary" style="padding:5px 10px;font-size:12px;" data-preview-quote="${q.id}">👁 Preview</button></td>
-    </tr>`).join('');
-    const mobileCards = quotes.map(q => `
-      <div class="mobile-card-row">
-        <div class="mcr-title">${q.number} — ${q.client_name||''}</div>
-        <div class="mcr-row"><span class="mcr-label">Venue</span><span class="mcr-value">${q.venue||'—'}</span></div>
-        <div class="mcr-row"><span class="mcr-label">Date</span><span class="mcr-value">${q.quote_date||''}</span></div>
-        <div class="mcr-row"><span class="mcr-label">Total</span><span class="mcr-value">${fmt(q.total)}</span></div>
-        <div class="mcr-row"><span class="mcr-label">Status</span><span class="mcr-value">${badge(q)}</span></div>
-        <div class="mcr-actions"><button class="button" style="flex:1;justify-content:center;" data-preview-quote="${q.id}">👁 Preview</button></div>
-      </div>`).join('');
     return `<div style="max-width:1100px;">
       <div class="page-header">
-        <div><h2 class="page-title">All Quotes</h2><p class="page-subtitle">${quotes.length} total</p></div>
+        <div><h2 class="page-title">All Quotes</h2><p class="page-subtitle">${this.state.quotes.length} total quotes</p></div>
         <button class="button" onclick="app.setView('newquote')">+ New Quote</button>
       </div>
-      <div class="card">
-        <div class="desktop-table">
-          ${quotes.length ? `<table><thead><tr><th>Quote#</th><th>Client</th><th>Venue</th><th>Date</th><th>Total</th><th>Status</th><th></th></tr></thead><tbody>${desktopRows}</tbody></table>` : '<p style="text-align:center;color:var(--gray);padding:24px;">No quotes yet.</p>'}
-        </div>
-        ${mobileCards}
-      </div>
+      <div class="card">${this.renderQuotesTable(this.state.quotes)}</div>
     </div>`;
   },
 
   renderQuotesTable(quotes) {
-    if (!quotes||!quotes.length) return '<p style="text-align:center;color:var(--gray);padding:20px;">No quotes yet.</p>';
-    const fmt = n => 'KES '+Number(n||0).toLocaleString('en',{minimumFractionDigits:2});
-    const statusColor = {draft:'#6B7280',pending:'#D97706',accepted:'#059669',declined:'#DC2626'};
-    const rows = quotes.map(q=>`<tr>
-      <td><strong>${q.number||''}</strong></td><td>${q.client_name||''}</td>
-      <td>${q.quote_date||''}</td><td><strong>${fmt(q.total)}</strong></td>
-      <td><span style="background:${statusColor[q.status]||'#6B7280'}22;color:${statusColor[q.status]||'#6B7280'};padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700;">${q.status||'draft'}</span></td>
-      <td><button class="button secondary" style="padding:4px 8px;font-size:11px;" data-preview-quote="${q.id}">👁</button></td>
-    </tr>`).join('');
-    const mobileCards = quotes.map(q=>`
-      <div class="mobile-card-row">
-        <div class="mcr-title">${q.number} — ${q.client_name||''}</div>
-        <div class="mcr-row"><span class="mcr-label">Total</span><span class="mcr-value">${fmt(q.total)}</span></div>
-        <div class="mcr-actions"><button class="button" style="flex:1;justify-content:center;" data-preview-quote="${q.id}">👁 Preview</button></div>
-      </div>`).join('');
-    return `
-      <div class="desktop-table"><table><thead><tr><th>Quote#</th><th>Client</th><th>Date</th><th>Total</th><th>Status</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>
-      ${mobileCards}`;
-  }
+    if (!quotes || quotes.length === 0) {
+      return `<p style="text-align:center;color:var(--gray);padding:30px;">No quotes yet. <a href="#" onclick="app.setView('newquote')" style="color:var(--blue);">Create your first quote</a>.</p>`;
+    }
+    const statusColor = { draft: '#6B7280', pending: '#D97706', accepted: '#059669', declined: '#DC2626' };
+    return `<table>
+      <thead><tr>
+        <th>Quote #</th><th>Client</th><th>Date</th><th>Total</th><th>Status</th><th>Actions</th>
+      </tr></thead>
+      <tbody>${quotes.map(q => `
+        <tr>
+          <td><strong>${q.number || ''}</strong></td>
+          <td>${q.client_name || ''}</td>
+          <td>${helpers.formatDate(q.quote_date)}</td>
+          <td><strong>${helpers.formatMoney(q.total, this.state.company.currency || 'KES')}</strong></td>
+          <td><span style="background:${statusColor[q.status]||'#6B7280'}22;color:${statusColor[q.status]||'#6B7280'};padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;">${q.status || 'draft'}</span></td>
+          <td>
+            <button class="button secondary" style="padding:5px 10px;font-size:12px;" data-preview-quote="${q.id}">👁 Preview</button>
+          </td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`;
+  },
+
+  // ── NEW QUOTE FORM ──────────────────────────────────────────────────────────
 });
