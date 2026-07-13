@@ -32,9 +32,8 @@ Object.assign(app, {
         </div>
       </div>`).join('');
 
-    return `<div style="max-width:1100px;">
-      <div class="page-header">
-        <div><h2 class="page-title">All Quotes</h2><p class="page-subtitle">${quotes.length} total</p></div>
+    return `<div class="page-wrap">
+      <div class="page-header"><div><h2 class="page-title">All Quotes</h2><p class="page-subtitle">${quotes.length} total</p></div>
         <button class="button" onclick="app.setView('newquote')">+ New Quote</button>
       </div>
       <div class="card">
