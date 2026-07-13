@@ -21,9 +21,8 @@ renderSettings() {
         <button onclick="this.closest('.terms-row').remove()" style="background:#DC2626;color:#fff;border:none;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;margin-top:4px;flex-shrink:0;">✕</button>
       </div>`).join('');
 
-    return `<div style="max-width:780px;">
-      <div class="page-header">
-        <div><h2 class="page-title">Company Settings</h2></div>
+    return `<div class="page-wrap">
+      <div class="page-header"><div><h2 class="page-title">Company Settings</h2></div>
       </div>
 
       <!-- Company Info -->
@@ -59,7 +58,7 @@ renderSettings() {
       <div class="card" style="margin-bottom:14px;">
         <h3 style="font-size:14px;font-weight:800;margin-bottom:4px;color:var(--navy);">✍️ Company Signature</h3>
         <p style="font-size:12px;color:var(--gray);margin-bottom:14px;">Draw your signature or upload an image. It will appear on every quote.</p>
-        <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
+        <div class="sig-wrap">
           <!-- Draw pad -->
           <div>
             <p style="font-size:12px;font-weight:700;margin-bottom:6px;">Draw Signature:</p>
