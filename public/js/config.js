@@ -5,3 +5,4 @@ const API_BASE = '/api';
 const OFFLINE = (() => {
   try { return window.location.protocol === 'file:' || !window.location.hostname; } catch(e) { return true; }
 })();
+})();
