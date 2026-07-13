@@ -1,25 +1,50 @@
 // ── REST API Client + Helpers ──────────────────────────────────
 const API = {
   async request(endpoint, method = 'GET', body = null) {
-    // Use local storage when running from file:// or no server
     if (OFFLINE) return LocalDB.handle(endpoint, method, body);
 
-    const options = { method, headers: { 'Content-Type': 'application/json' } };
+    const options = {
+      method,
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      cache: 'no-store',
+    };
     const token = localStorage.getItem('auth_token');
     if (token) options.headers.Authorization = `Bearer ${token}`;
-    if (body) options.body = JSON.stringify(body);
+    if (body !== null && body !== undefined) options.body = JSON.stringify(body);
+
     try {
       const response = await fetch(`${API_BASE}/${endpoint}`, options);
-      if (!response.ok && response.status === 401) {
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('user');
-        window.location.reload();
+      const contentType = response.headers.get('content-type') || '';
+      let payload = null;
+
+      if (contentType.includes('application/json')) {
+        try { payload = await response.json(); } catch (e) { payload = null; }
+      } else {
+        try { payload = await response.text(); } catch (e) { payload = null; }
       }
-      return await response.json();
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          localStorage.removeItem('auth_token');
+          localStorage.removeItem('user');
+          window.location.reload();
+        }
+        return {
+          success: false,
+          error: payload?.message || payload?.error || 'Request failed',
+          status: response.status,
+          data: payload,
+        };
+      }
+
+      return payload ?? { success: true };
     } catch (error) {
-      // Fallback to offline if server unreachable
-      console.warn('Server unreachable, using local storage');
-      return LocalDB.handle(endpoint, method, body);
+      console.error('API request failed', error);
+      return {
+        success: false,
+        error: 'Unable to reach the server. Please check your connection and try again.',
+        details: error?.message || String(error),
+      };
     }
   },
   auth: {
