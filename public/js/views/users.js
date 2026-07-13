@@ -26,9 +26,8 @@ Object.assign(app, {
         </div>
       </div>`).join('');
 
-    return `<div style="max-width:900px;">
-      <div class="page-header">
-        <div><h2 class="page-title">Users</h2><p class="page-subtitle">${users.length} users</p></div>
+    return `<div class="page-wrap">
+      <div class="page-header"><div><h2 class="page-title">Users</h2><p class="page-subtitle">${users.length} users</p></div>
         <button class="button" id="usr-add-btn">+ Add User</button>
       </div>
       <div class="card">
