@@ -36,9 +36,8 @@ Object.assign(app, {
         </div>
       </div>`).join('');
 
-    return `<div style="max-width:1000px;">
-      <div class="page-header">
-        <div><h2 class="page-title">Catalog</h2><p class="page-subtitle">${items.length} items</p></div>
+    return `<div class="page-wrap">
+      <div class="page-header"><div><h2 class="page-title">Catalog</h2><p class="page-subtitle">${items.length} items</p></div>
         <button class="button" id="cat-add-btn">+ Add Item</button>
       </div>
       <div class="card">
