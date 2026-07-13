@@ -1,9 +1,7 @@
-/* ═══════════════════════════════════════════════════════
-   Cayan Events Ke. — Responsive CSS
-   Breakpoints: desktop >900 | tablet 481-900 | phone ≤480
-   ═══════════════════════════════════════════════════════ */
+/* Cayan Events Ke. — Responsive CSS
+   Breakpoints: desktop >900 | tablet 481-900 | phone ≤480 */
 
-/* ─── Reset & Variables ─────────────────────────────── */
+/* Reset & Variables */
 * { margin:0; padding:0; box-sizing:border-box; }
 :root {
   --navy:#760014; --blue:#760014; --blue-hover:#5a000f;
@@ -13,10 +11,10 @@
 }
 body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; background:var(--bg); color:#111; }
 
-/* ─── App Shell ─────────────────────────────────────── */
+/* App Shell */
 .container { display:flex; height:100vh; overflow:hidden; }
 
-/* ─── Sidebar ───────────────────────────────────────── */
+/* Sidebar */
 .sidebar { width:220px; background:#760014; display:flex; flex-direction:column; flex-shrink:0; transition:transform .28s ease; }
 .sidebar-header { padding:22px 20px 16px; border-bottom:1px solid rgba(255,255,255,.08); color:#fff; }
 .sidebar-header .company-name { font-weight:700; font-size:14px; line-height:1.3; margin-bottom:4px; }
@@ -30,10 +28,10 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-se
 .logout-btn { width:100%; display:flex; align-items:center; gap:8px; padding:9px 12px; border:1px solid rgba(208,169,94,.3); background:transparent; color:#D0A95E; font-size:12px; cursor:pointer; border-radius:7px; transition:all .15s; }
 .logout-btn:hover { background:rgba(208,169,94,.1); }
 
-/* ─── Main ──────────────────────────────────────────── */
+/* Main */
 .main { flex:1; overflow-y:auto; padding:28px; min-width:0; }
 
-/* ─── Hamburger ─────────────────────────────────────── */
+/* Hamburger */
 .mobile-menu-btn {
   display:none; position:fixed; top:14px; left:14px; z-index:1100;
   width:44px; height:44px; border-radius:8px;
@@ -44,13 +42,13 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-se
 .sidebar-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:999; }
 .sidebar-backdrop.open { display:block; }
 
-/* ─── Loader ────────────────────────────────────────── */
+/* Loader */
 .loader { display:flex; align-items:center; justify-content:center; height:100vh; }
 .loader-content { text-align:center; color:var(--navy); }
 .loader-icon { font-size:40px; margin-bottom:14px; }
 .loader-text { font-weight:700; font-size:18px; }
 
-/* ─── Toast ─────────────────────────────────────────── */
+/* Toast */
 .toast { position:fixed; top:20px; right:20px; z-index:9999; padding:12px 22px; border-radius:9px; color:#fff; font-weight:600; font-size:13px; box-shadow:0 6px 20px rgba(0,0,0,.18); animation:slideIn .3s ease-out; max-width:320px; }
 .toast.success { background:var(--green); }
 .toast.error { background:var(--red); }
