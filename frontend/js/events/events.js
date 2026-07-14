@@ -259,6 +259,23 @@ Object.assign(app, {
       this.showModal('Add Catalog Item', catModalBody(), (modal, close) => saveCatalogItem(close));
     });
 
+    // Export catalog to Excel/CSV
+    document.getElementById('cat-export-btn')?.addEventListener('click', () => {
+      this.exportCatalogToExcel();
+    });
+
+    // Import catalog from Excel/CSV
+    document.getElementById('cat-import-btn')?.addEventListener('click', () => {
+      document.getElementById('cat-import-file')?.click();
+    });
+
+    document.getElementById('cat-import-file')?.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      await this.importCatalogFromFile(file);
+      e.target.value = ''; // reset so same file can be re-imported
+    });
+
     document.querySelectorAll('[data-edit-catalog]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const id = e.currentTarget.dataset.editCatalog;
