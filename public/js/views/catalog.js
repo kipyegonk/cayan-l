@@ -49,7 +49,7 @@ renderCatalog() {
     </div>`;
   },
 
-  // ── Export catalog to Excel ──────────────────────────────────
+  // Export catalog to Excel 
   exportCatalogToExcel() {
     const items = this.state.catalog || [];
     if (!items.length) { this.notify('No items to export', 'error'); return; }
