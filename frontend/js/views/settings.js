@@ -21,7 +21,7 @@ renderSettings() {
         <button onclick="this.closest('.terms-row').remove()" style="background:#DC2626;color:#fff;border:none;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;margin-top:4px;flex-shrink:0;">✕</button>
       </div>`).join('');
 
-    return `<div style="max-width:780px;">
+    return `<div class="view-wrap">
       <div class="page-header">
         <div><h2 class="page-title">Company Settings</h2></div>
       </div>

@@ -3,7 +3,7 @@
 Object.assign(app, {
 renderUsers() {
     const users = this.state.users || [];
-    return `<div style="max-width:900px;">
+    return `<div class="view-wrap">
       <div class="page-header">
         <div><h2 class="page-title">Users</h2></div>
         <button class="button" id="usr-add-btn">+ Add User</button>

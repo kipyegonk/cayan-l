@@ -3,12 +3,12 @@
 Object.assign(app, {
 renderClients() {
     const clients = this.state.clients || [];
-    return `<div style="max-width:1000px;">
+    return `<div class="view-wrap">
       <div class="page-header">
         <div><h2 class="page-title">Clients</h2><p class="page-subtitle">${clients.length} clients</p></div>
         <button class="button" id="cli-add-btn">+ Add Client</button>
       </div>
-      <div class="card" style="overflow-x:auto;">
+      <div class="card">
         <table>
           <thead><tr>
             <th>Name</th><th>Email</th><th>Phone</th>

@@ -5,7 +5,7 @@ renderCatalog() {
     const items = this.state.catalog || [];
     const CATEGORIES = ['Tents & Structures','Flowers & Décor','Lighting','Furniture','Catering','Logistics','Audio Visual','Miscellaneous'];
     const UNITS = ['pcs','set','day','hr','table','chair','per person','lot','m²','kg'];
-    return `<div style="max-width:1000px;">
+    return `<div class="page-wrap">
       <div class="page-header">
         <div><h2 class="page-title">Catalog</h2><p class="page-subtitle">${items.length} items</p></div>
         <div class="btn-group">
@@ -175,7 +175,7 @@ renderCatalog() {
       <p style="margin-bottom:12px;color:#6B7280;font-size:13px;">
         Found <strong>${rows.length} item${rows.length!==1?'s':''}</strong> to import. Preview:
       </p>
-      <div style="overflow-x:auto;">
+      <div class="table-scroll">
         <table style="font-size:12px;width:100%;border-collapse:collapse;">
           <thead><tr style="background:#760014;">
             <th style="color:#D0A95E;padding:6px 8px;text-align:left;">Name</th>

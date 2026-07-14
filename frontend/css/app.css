@@ -335,3 +335,160 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
 
 /* Cayan logo SVG fallback */
 .cayan-logo-svg { width: 220px; height: auto; }
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE ADDITIONS
+   view-wrap, table-scroll, form-grid, stats-grid, btn-group
+   ═══════════════════════════════════════════════════════════ */
+
+/* View wrapper - replaces inline max-width */
+.view-wrap { max-width: 1100px; }
+
+/* Table horizontal scroll container */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.card { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* Form actions row */
+.form-actions { display:flex; gap:12px; justify-content:flex-end; margin-top:20px; flex-wrap:wrap; }
+
+/* Three column form grid */
+.form-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
+
+/* ── Hamburger button ─────────────────────────────────────── */
+.mobile-menu-btn {
+  display: none;
+  position: fixed; top: 14px; left: 14px; z-index: 1100;
+  width: 44px; height: 44px; border-radius: 8px;
+  background: #760014; color: #D0A95E; border: none;
+  font-size: 22px; align-items: center; justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,.3); cursor: pointer;
+}
+
+/* ── Sidebar backdrop ─────────────────────────────────────── */
+.sidebar-backdrop {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.5); z-index: 999;
+}
+.sidebar-backdrop.open { display: block; }
+
+/* ═══════════════════════════════════════════════════════════
+   TABLET  ≤ 900px
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+
+  /* Show hamburger */
+  .mobile-menu-btn { display: flex; }
+
+  /* Sidebar: slide in */
+  .container { position: relative; overflow: hidden; }
+  .sidebar {
+    position: fixed; top: 0; left: 0; bottom: 0;
+    width: 260px; max-width: 82vw;
+    transform: translateX(-100%);
+    transition: transform .28s ease;
+    z-index: 1000;
+    box-shadow: 4px 0 24px rgba(0,0,0,.3);
+  }
+  .sidebar.open { transform: translateX(0); }
+
+  /* Main gains padding for hamburger */
+  .main { padding: 70px 16px 32px; }
+
+  /* View wrap full width */
+  .view-wrap { max-width: 100%; }
+
+  /* Page header stacks */
+  .page-header { flex-direction: column; align-items: stretch; gap: 10px; }
+  .page-header .button { width: 100%; justify-content: center; }
+  .page-header .btn-group { flex-direction: column; }
+  .page-header .btn-group .button { width: 100%; justify-content: center; }
+  .page-title { font-size: 19px; }
+
+  /* Stats: 3 columns */
+  .stats-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 10px; }
+  .stat-card { padding: 14px; }
+  .stat-value { font-size: 17px; }
+
+  /* Cards */
+  .card { padding: 16px; border-radius: 10px; }
+
+  /* Inputs: 16px stops iOS zoom */
+  .input-field { font-size: 16px !important; }
+
+  /* Forms: 1 col */
+  .form-grid { grid-template-columns: 1fr !important; gap: 10px; }
+  .form-grid.three-col { grid-template-columns: 1fr !important; }
+
+  /* Tables */
+  table { white-space: nowrap; font-size: 12px; }
+  table th, table td { padding: 8px 8px; }
+
+  /* Modal: bottom sheet */
+  .modal { padding: 0 !important; align-items: flex-end; }
+  .modal-content {
+    max-width: 100% !important; width: 100% !important;
+    border-radius: 16px 16px 0 0;
+    max-height: 90vh; padding: 20px;
+  }
+
+  /* Auth */
+  .auth-screen { flex-direction: column; }
+  .auth-left { display: none; }
+  .auth-right { width: 100% !important; min-height: 100vh; box-shadow: none; }
+  .auth-form-wrap { padding: 36px 20px; }
+  .auth-mobile-logo { display: block; }
+
+  /* Toast */
+  .toast { left: 14px; right: 14px; top: 14px; max-width: none; text-align: center; }
+
+  /* Form actions */
+  .form-actions { justify-content: stretch; }
+  .form-actions .button { flex: 1; justify-content: center; }
+
+  /* Quote preview */
+  .quote-preview-overlay { padding: 0; align-items: flex-start; }
+  .quote-preview-wrapper { width: 100vw !important; min-height: auto; padding: 14px 12px 28px; font-size: 7.5pt; }
+  .qp-controls { margin: -14px -12px 14px; padding: 8px; flex-wrap: wrap; }
+  .qp-controls button { flex: 1; font-size: 12px; padding: 8px 6px; }
+  .qp-header { flex-direction: column; gap: 10px; }
+  .qp-logo-img, .cayan-logo-svg { width: 120px !important; margin-left: 0 !important; }
+  .qp-title-block h1 { font-size: 14pt; }
+  .qp-table { font-size: 6.5pt; }
+  .qp-table th, .qp-table td { padding: 3px 4px; }
+  .qp-totals-table { width: 100% !important; }
+  .qp-sig-row { flex-direction: column; gap: 16px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PHONE  ≤ 480px
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+  .main { padding: 64px 12px 24px; }
+
+  /* Stats: 2 columns */
+  .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px; }
+  .stat-card { padding: 12px; }
+  .stat-icon { font-size: 20px; margin-bottom: 5px; }
+  .stat-value { font-size: 15px; }
+  .stat-label { font-size: 10px; }
+
+  .page-title { font-size: 17px; }
+  .card { padding: 12px; }
+  .button { font-size: 13px; padding: 10px 14px; }
+  .auth-form-wrap { padding: 28px 16px; }
+
+  /* Quote preview */
+  .quote-preview-wrapper { padding: 10px 8px 24px; font-size: 7pt; }
+  .qp-title-block h1 { font-size: 12pt; }
+  .qp-table { font-size: 6pt; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TINY  ≤ 360px
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 360px) {
+  .stats-grid { grid-template-columns: 1fr !important; }
+  .main { padding: 60px 10px 20px; }
+  .modal-content { padding: 14px; }
+  .auth-form-wrap { padding: 24px 12px; }
+}

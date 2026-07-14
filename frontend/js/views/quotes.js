@@ -8,7 +8,7 @@ renderNewQuote() {
       `<option value="${i.id}" data-name="${i.name}" data-price="${i.cost_price||0}" data-unit="${i.unit||''}">${i.name}${i.category?' ('+i.category+')':''}</option>`
     ).join('');
 
-    return `<div style="max-width:960px;">
+    return `<div class="view-wrap">
       <div class="page-header">
         <div><h2 class="page-title">New Quote</h2><p class="page-subtitle">Create a professional quotation</p></div>
       </div>
@@ -61,9 +61,9 @@ renderNewQuote() {
         </div>
 
         <!-- Line items -->
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div class="page-header">
           <h3 style="font-size:14px;font-weight:800;margin:0;">Line Items</h3>
-          <div style="display:flex;gap:8px;">
+          <div class="btn-group">
             <button class="button secondary" style="font-size:12px;padding:6px 12px;" id="nq-add-item">+ Custom Item</button>
             <button class="button secondary" style="font-size:12px;padding:6px 12px;" id="nq-add-section">+ Section Header</button>
           </div>
