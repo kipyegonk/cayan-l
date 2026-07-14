@@ -82,7 +82,7 @@ renderCatalog() {
     this.notify('Catalog exported successfully');
   },
 
-  // ── Import catalog from Excel/CSV ───────────────────────────
+  // Import catalog from Excel/CSV 
   async importCatalogFromFile(file) {
     const ext = file.name.split('.').pop().toLowerCase();
 
