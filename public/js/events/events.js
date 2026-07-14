@@ -43,33 +43,26 @@ Object.assign(app, {
       });
     }
     // Auth 
-
+    document.querySelectorAll('.auth-tab, .auth-mode-btn').forEach(b => b.addEventListener('click', (e) => {
+      this.state.authMode = e.currentTarget.dataset.mode; this.render();
+    }));
     document.getElementById('auth-submit')?.addEventListener('click', async () => {
-      const email    = document.getElementById('auth-email')?.value;
+      const email = document.getElementById('auth-email')?.value;
       const password = document.getElementById('auth-password')?.value;
-      if (!email || !password) { this.notify('Enter email and password', 'error'); return; }
-      await this.handleLogin(email, password);
+      if (this.state.authMode === 'login') {
+        if (!email || !password) { this.notify('Enter email and password', 'error'); return; }
+        await this.handleLogin(email, password);
+      } else {
+        const name = document.getElementById('reg-name')?.value;
+        if (!name || !email || !password) { this.notify('All fields required', 'error'); return; }
+        await this.handleRegister(name, email, password);
+      }
     });
 
     // Nav 
-    //  Nav 
     document.querySelectorAll('.nav-item').forEach(b =>
-      b.addEventListener('click', (e) => {
-        this.setView(e.currentTarget.dataset.view);
-        document.getElementById('app-sidebar')?.classList.remove('open');
-        document.getElementById('sidebar-backdrop')?.classList.remove('open');
-      }));
+      b.addEventListener('click', (e) => this.setView(e.currentTarget.dataset.view)));
     document.getElementById('logout-btn')?.addEventListener('click', () => this.handleLogout());
-
-    //  Mobile menu toggle 
-    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
-      document.getElementById('app-sidebar')?.classList.add('open');
-      document.getElementById('sidebar-backdrop')?.classList.add('open');
-    });
-    document.getElementById('sidebar-backdrop')?.addEventListener('click', () => {
-      document.getElementById('app-sidebar')?.classList.remove('open');
-      document.getElementById('sidebar-backdrop')?.classList.remove('open');
-    });
 
     // Quote preview buttons 
     document.querySelectorAll('[data-preview-quote]').forEach(btn => {
@@ -264,6 +257,23 @@ Object.assign(app, {
 
     document.getElementById('cat-add-btn')?.addEventListener('click', () => {
       this.showModal('Add Catalog Item', catModalBody(), (modal, close) => saveCatalogItem(close));
+    });
+
+    // Export catalog to Excel/CSV
+    document.getElementById('cat-export-btn')?.addEventListener('click', () => {
+      this.exportCatalogToExcel();
+    });
+
+    // Import catalog from Excel/CSV
+    document.getElementById('cat-import-btn')?.addEventListener('click', () => {
+      document.getElementById('cat-import-file')?.click();
+    });
+
+    document.getElementById('cat-import-file')?.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      await this.importCatalogFromFile(file);
+      e.target.value = ''; // reset so same file can be re-imported
     });
 
     document.querySelectorAll('[data-edit-catalog]').forEach(btn => {
