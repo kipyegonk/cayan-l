@@ -61,7 +61,9 @@ renderAuth() {
       ...(this.state.user?.role === 'admin' ? [{ id: 'users', emoji: '🔑', label: 'Users' }] : []),
       { id: 'settings',  emoji: '⚙️', label: 'Settings' },
     ];
-    return `<div class="container">
+    return `<button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+      <div class="container">
       <aside class="sidebar">
         <div class="sidebar-header">
           ${this.state.company.logo
@@ -95,8 +97,9 @@ renderAuth() {
 
   renderDashboard() {
     const s = this.state.stats || {};
-    return `<div class="page-wrap">
-      <div class="page-header"><div><h2 class="page-title">Dashboard</h2><p class="page-subtitle">Overview of your quotation activity</p></div>
+    return `<div class="view-wrap">
+      <div class="page-header">
+        <div><h2 class="page-title">Dashboard</h2><p class="page-subtitle">Overview of your quotation activity</p></div>
         <button class="button" onclick="app.setView('newquote')">+ New Quote</button>
       </div>
       <div class="stats-grid">
@@ -114,8 +117,9 @@ renderAuth() {
   },
 
   renderQuotesList() {
-    return `<div class="page-wrap">
-      <div class="page-header"><div><h2 class="page-title">All Quotes</h2><p class="page-subtitle">${this.state.quotes.length} total quotes</p></div>
+    return `<div class="view-wrap">
+      <div class="page-header">
+        <div><h2 class="page-title">All Quotes</h2><p class="page-subtitle">${this.state.quotes.length} total quotes</p></div>
         <button class="button" onclick="app.setView('newquote')">+ New Quote</button>
       </div>
       <div class="card">${this.renderQuotesTable(this.state.quotes)}</div>
@@ -146,5 +150,5 @@ renderAuth() {
     </table>`;
   },
 
-  // NEW QUOTE FORM
+  // ── NEW QUOTE FORM ──────────────────────────────────────────────────────────
 });

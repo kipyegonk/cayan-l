@@ -15,7 +15,7 @@ Object.assign(app, {
           <button class="modal-close" id="modal-close-btn">✕</button>
         </div>
         <div id="modal-body">${bodyHtml}</div>
-        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:20px;">
+        <div class="form-actions">
           <button class="button secondary" id="modal-cancel-btn">Cancel</button>
           <button class="button green" id="modal-confirm-btn">${confirmLabel}</button>
         </div>
@@ -59,9 +59,24 @@ Object.assign(app, {
       }
     });
 
+    // Hamburger menu toggle
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+      document.querySelector('.sidebar')?.classList.toggle('open');
+      document.getElementById('sidebar-backdrop')?.classList.toggle('open');
+    });
+    document.getElementById('sidebar-backdrop')?.addEventListener('click', () => {
+      document.querySelector('.sidebar')?.classList.remove('open');
+      document.getElementById('sidebar-backdrop')?.classList.remove('open');
+    });
+
     // Nav 
     document.querySelectorAll('.nav-item').forEach(b =>
-      b.addEventListener('click', (e) => this.setView(e.currentTarget.dataset.view)));
+      b.addEventListener('click', (e) => {
+        this.setView(e.currentTarget.dataset.view);
+        // Close sidebar on mobile after nav click
+        document.querySelector('.sidebar')?.classList.remove('open');
+        document.getElementById('sidebar-backdrop')?.classList.remove('open');
+      }));
     document.getElementById('logout-btn')?.addEventListener('click', () => this.handleLogout());
 
     // Quote preview buttons 
