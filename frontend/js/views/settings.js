@@ -86,7 +86,7 @@ renderSettings() {
 
       <!-- Change My Password -->
       <div class="card" style="margin-bottom:14px;">
-        <h3 style="font-size:14px;font-weight:800;margin-bottom:4px;color:var(--navy);">🔑 Change My Password</h3>
+        <h3 style="font-size:14px;font-weight:800;margin-bottom:4px;color:var(--navy);"> Change My Password</h3>
         <p style="font-size:12px;color:var(--gray);margin-bottom:14px;">Update your own login password.</p>
         <div class="form-grid">
           <div class="form-group">
