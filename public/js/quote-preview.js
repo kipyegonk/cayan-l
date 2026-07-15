@@ -135,7 +135,7 @@ function renderQuotePreviewHTML(quote, company) {
     </tbody>
   </table>
 
-  <!-- ── TOTALS -->
+  <!-- TOTALS -->
   <table class="qp-totals-table">
     <tr>
       <td colspan="2" style="border-top:2px solid #bbb;"></td>
