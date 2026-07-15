@@ -154,7 +154,7 @@ function renderQuotePreviewHTML(quote, company) {
     </tr>
   </table>
 
-  <!-- ── TERMS AND CONDITIONS -->
+  <!-- TERMS AND CONDITIONS -->
   <div class="qp-terms-header">Terms and Conditions</div>
   <ul class="qp-terms-list">
     ${(() => {
