@@ -363,7 +363,7 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
   box-shadow: 0 2px 10px rgba(0,0,0,.3); cursor: pointer;
 }
 
-/* ── Sidebar backdrop ─────────────────────────────────────── */
+/* ── Sidebar backdrop */
 .sidebar-backdrop {
   display: none; position: fixed; inset: 0;
   background: rgba(0,0,0,.5); z-index: 999;
