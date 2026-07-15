@@ -172,7 +172,7 @@ function renderQuotePreviewHTML(quote, company) {
     })()}
   </ul>
 
-  <!-- ── SIGNATURE -->
+  <!-- SIGNATURE -->
   <div class="qp-signature">
     <p style="margin-bottom:1px;">Regards,</p>
     <p style="margin-bottom:14px;">${quote.contact_person || quote.client_name || ''}</p>
