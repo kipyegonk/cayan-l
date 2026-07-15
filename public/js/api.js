@@ -1,4 +1,4 @@
-// ── REST API Client + Helpers ──────────────────────────────────
+// REST API Client + Helpers 
 const API = {
   async request(endpoint, method = 'GET', body = null) {
     if (OFFLINE) return LocalDB.handle(endpoint, method, body);
