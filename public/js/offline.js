@@ -1,4 +1,4 @@
-// Offline LocalStorage DB (runs when no PHP server) ──────────
+// Offline LocalStorage DB (runs when no PHP server)
 const LocalDB = {
   _get(k) { try { return JSON.parse(localStorage.getItem('cayan_' + k) || 'null'); } catch(e) { return null; } },
   _set(k, v) { localStorage.setItem('cayan_' + k, JSON.stringify(v)); },
