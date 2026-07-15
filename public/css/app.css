@@ -335,10 +335,10 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
 
 /* Cayan logo SVG fallback */
 .cayan-logo-svg { width: 220px; height: auto; }
-/* ═══════════════════════════════════════════════════════════
+/* 
    RESPONSIVE ADDITIONS
    view-wrap, table-scroll, form-grid, stats-grid, btn-group
-   ═══════════════════════════════════════════════════════════ */
+   */
 
 /* View wrapper - replaces inline max-width */
 .view-wrap { max-width: 1100px; }
