@@ -37,10 +37,10 @@ function renderQuotePreviewHTML(quote, company) {
   const companyName = c.name || 'Cayan Events Ke.';
   const logo = c.logo || null; // base64
   const currency = c.currency || 'KES';
-  const vatRate = Number(quote.vat_rate || 16);
+  const vatRate = quote.vat_rate != null ? Number(quote.vat_rate) : 16;
   const subtotal = Number(quote.subtotal || 0);
-  const vatAmount = Number(quote.vat_amount || (subtotal * vatRate / 100));
-  const total = Number(quote.total || (subtotal + vatAmount));
+  const vatAmount = quote.vat_amount != null ? Number(quote.vat_amount) : (subtotal * vatRate / 100);
+  const total = quote.total != null ? Number(quote.total) : (subtotal + vatAmount);
   const items = quote.items || [];
   const groups = groupItemsBySection(items);
 
