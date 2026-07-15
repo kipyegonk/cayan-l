@@ -107,7 +107,7 @@ function renderQuotePreviewHTML(quote, company) {
     </div>
   </div>
 
-  <!-- ── TITLE + META ── -->
+  <!-- ── TITLE + META -->
   <div class="qp-title-block">
     <h1>QUOTATION</h1>
     <div class="qp-meta">
