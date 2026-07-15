@@ -353,7 +353,7 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
 /* Three column form grid */
 .form-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
 
-/* ── Hamburger button */
+/* Hamburger button */
 .mobile-menu-btn {
   display: none;
   position: fixed; top: 14px; left: 14px; z-index: 1100;
