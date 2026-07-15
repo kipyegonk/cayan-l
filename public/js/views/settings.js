@@ -103,7 +103,7 @@ renderSettings() {
             <input type="password" id="pwd-confirm" class="input-field" placeholder="Repeat new password">
           </div>
         </div>
-        <button class="button" id="change-pwd-btn" style="background:#760014;">🔑 Update Password</button>
+        <button class="button" id="change-pwd-btn" style="background:#760014;"> Update Password</button>
       </div>
 
       <button class="button green" id="set-save-btn" style="padding:12px 28px;font-size:14px;"> Save All Settings</button>
