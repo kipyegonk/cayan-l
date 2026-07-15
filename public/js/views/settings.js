@@ -28,7 +28,7 @@ renderSettings() {
 
       <!-- Company Info -->
       <div class="card" style="margin-bottom:14px;">
-        <h3 style="font-size:14px;font-weight:800;margin-bottom:16px;color:var(--navy);">🏢 Company Information</h3>
+        <h3 style="font-size:14px;font-weight:800;margin-bottom:16px;color:var(--navy);"> Company Information</h3>
         <div class="form-grid">
           <div class="form-group full"><label>Company Name</label><input type="text" id="set-name" class="input-field" value="${c.name||''}" placeholder="Cayan Events Ke."></div>
           <div class="form-group"><label>Phone</label><input type="text" id="set-phone" class="input-field" value="${c.phone||''}" placeholder="0737 611 658"></div>
