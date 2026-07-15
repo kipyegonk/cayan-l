@@ -1,4 +1,4 @@
-// ── Boot — initialize app on page load ─────────────────────────
+// Boot — initialize app on page load ─────────────────────────
 // Boot
 window.addEventListener('load', async () => {
   const token = localStorage.getItem('auth_token');
