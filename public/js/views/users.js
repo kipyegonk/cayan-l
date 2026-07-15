@@ -17,7 +17,7 @@ renderUsers() {
             <td><span style="background:${u.role==='admin'?'#760014':'#374151'};color:#D0A95E;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;">${u.role.toUpperCase()}</span></td>
             <td>${u.verified?'✅ Verified':'⏳ Pending'}</td>
             <td style="white-space:nowrap;">
-              <button class="button secondary" style="padding:4px 10px;font-size:11px;margin-right:4px;" data-change-pwd="${u.id}" data-user-name="${u.name}">🔑 Password</button>
+              <button class="button secondary" style="padding:4px 10px;font-size:11px;margin-right:4px;" data-change-pwd="${u.id}" data-user-name="${u.name}"> Password</button>
             </td>
           </tr>`).join('') : '<tr><td colspan="5" style="text-align:center;color:var(--gray);padding:20px;">No users.</td></tr>'}</tbody>
         </table>
