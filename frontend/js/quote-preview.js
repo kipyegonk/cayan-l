@@ -120,7 +120,7 @@ function renderQuotePreviewHTML(quote, company) {
     </div>
   </div>
 
-  <!-- ── ITEMS TABLE ── -->
+  <!-- ── ITEMS TABLE -->
   <table class="qp-table">
     <thead>
       <tr>
