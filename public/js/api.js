@@ -99,7 +99,7 @@ const helpers = {
   addDays: (date, days) => { const r = new Date(date); r.setDate(r.getDate() + days); return r.toISOString().slice(0, 10); },
 };
 
-// ─── Quote preview renderer ───────────────────────────────────────────────────
+//  Quote preview renderer 
 // Renders a quote in the exact layout of the Cayan Events Ke. PDF template.
 // The quote object shape mirrors what the API returns:
 //   { number, quote_date, valid_until, client_name, client_company, venue,
