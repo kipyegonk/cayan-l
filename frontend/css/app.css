@@ -485,7 +485,7 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
 
 /*
    TINY  ≤ 360px
-   ═══════════════════════════════════════════════════════════ */
+   */
 @media (max-width: 360px) {
   .stats-grid { grid-template-columns: 1fr !important; }
   .main { padding: 60px 10px 20px; }
