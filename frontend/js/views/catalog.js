@@ -5,7 +5,7 @@ renderCatalog() {
     const items = this.state.catalog || [];
     const CATEGORIES = ['Tents & Structures','Flowers & Décor','Lighting','Furniture','Catering','Logistics','Audio Visual','Miscellaneous'];
     const UNITS = ['pcs','set','day','hr','table','chair','per person','lot','m²','kg'];
-    return `<div class="page-wrap">
+    return `<div class="view-wrap">
       <div class="page-header">
         <div><h2 class="page-title">Catalog</h2><p class="page-subtitle">${items.length} items</p></div>
         <div class="btn-group">
