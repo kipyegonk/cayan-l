@@ -411,7 +411,7 @@ Object.assign(app, {
           const result = await API.users.update(uid, { password: np });
           if (result.success) { this.notify(`Password updated for ${name}!`); close(); }
           else { this.notify(result.error || 'Failed to update password', 'error'); }
-        }, '🔑 Update Password');
+        }, ' Update Password');
       });
     });
 
