@@ -83,7 +83,7 @@ function renderQuotePreviewHTML(quote, company) {
     <button onclick="document.querySelector('.quote-preview-overlay').remove()" style="background:#374151;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">✕ Close</button>
   </div>
 
-  <!-- HEADER ── -->
+  <!-- HEADER -->
   <div class="qp-header">
     <div class="qp-logo-area">
       ${logoHtml}
