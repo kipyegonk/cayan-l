@@ -458,7 +458,7 @@ label { display: block; font-size: 12px; font-weight: 700; color: #374151; margi
   .qp-sig-row { flex-direction: column; gap: 16px; }
 }
 
-/* ═══════════════════════════════════════════════════════════
+/*
    PHONE  ≤ 480px
    ═══════════════════════════════════════════════════════════ */
 @media (max-width: 480px) {
