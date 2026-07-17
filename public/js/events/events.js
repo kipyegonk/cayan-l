@@ -89,6 +89,29 @@ Object.assign(app, {
       });
     });
 
+    // Quote status change dropdowns
+    document.querySelectorAll('[data-status-quote]').forEach(sel => {
+      sel.addEventListener('change', async (e) => {
+        const id     = e.currentTarget.dataset.statusQuote;
+        const status = e.currentTarget.value;
+        const statusColor = { draft:'#6B7280', pending:'#D97706', accepted:'#059669', declined:'#DC2626' };
+        const clr = statusColor[status] || '#6B7280';
+        // Update dropdown color immediately
+        e.currentTarget.style.background = `${clr}22`;
+        e.currentTarget.style.color      = clr;
+        e.currentTarget.style.borderColor = `${clr}55`;
+        try {
+          await API.quotes.update(id, { status });
+          // Update local state
+          const q = this.state.quotes?.find(q => String(q.id) === String(id));
+          if (q) q.status = status;
+          this.notify(`Status updated to ${status}`);
+        } catch(err) {
+          this.notify('Failed to update status', 'error');
+        }
+      });
+    });
+
     // New Quote 
     if (document.getElementById('nq-items-container')) {
       // Single persistent delegated listener on the container for row events
