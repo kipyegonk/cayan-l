@@ -85,3 +85,47 @@ const app = {
 
 // Expose to window for inline handlers (onclick="app.setView(...)")
 try { window.app = app; } catch(e) { /* non-browser env */ }
+// ── Populate edit quote form ─────────────────────────────────
+Object.assign(app, {
+  populateEditQuote(quote) {
+    // Update page title
+    const title = document.querySelector('.page-title');
+    if (title) title.textContent = `Edit Quote ${quote.number || ''}`;
+
+    // Fill header fields
+    const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+    set('nq-client',  quote.client_id);
+    set('nq-contact', quote.contact_person);
+    set('nq-venue',   quote.venue);
+    set('nq-guests',  quote.guests);
+    set('nq-date',    quote.quote_date ? quote.quote_date.split('T')[0] : '');
+    set('nq-vat',     quote.vat_rate != null ? quote.vat_rate : 16);
+    set('nq-notes',   quote.notes);
+
+    // Clear existing rows and populate with quote items
+    const container = document.getElementById('nq-items-container');
+    if (!container || !quote.items) return;
+    container.innerHTML = '';
+
+    let rowIdx = 1;
+    (quote.items || []).forEach(item => {
+      if (item.type === 'section') {
+        container.insertAdjacentHTML('beforeend', this.renderNewQuoteItemRow(rowIdx++, 'section', { section: item.section }));
+      } else if (item.type === 'subsection') {
+        container.insertAdjacentHTML('beforeend', this.renderNewQuoteItemRow(rowIdx++, 'section', { section: item.subsection }));
+      } else {
+        container.insertAdjacentHTML('beforeend', this.renderNewQuoteItemRow(rowIdx++, 'item', {
+          name:      item.name,
+          qty:       item.qty,
+          price:     item.unit_price,
+        }));
+      }
+    });
+
+    this.calcNewQuoteTotals();
+
+    // Update save button text
+    const saveBtn = document.getElementById('nq-save-btn');
+    if (saveBtn) saveBtn.textContent = '💾 Update Quote';
+  },
+});
