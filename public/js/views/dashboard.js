@@ -131,24 +131,35 @@ renderAuth() {
       return `<p style="text-align:center;color:var(--gray);padding:30px;">No quotes yet. <a href="#" onclick="app.setView('newquote')" style="color:var(--blue);">Create your first quote</a>.</p>`;
     }
     const statusColor = { draft: '#6B7280', pending: '#D97706', accepted: '#059669', declined: '#DC2626' };
+    const statusLabel = { draft: '📝 Draft', pending: '⏳ Pending', accepted: '✅ Accepted', declined: '❌ Declined' };
     return `<table>
       <thead><tr>
         <th>Quote #</th><th>Client</th><th>Date</th><th>Total</th><th>Status</th><th>Actions</th>
       </tr></thead>
-      <tbody>${quotes.map(q => `
-        <tr>
+      <tbody>${quotes.map(q => {
+        const st = q.status || 'draft';
+        const clr = statusColor[st] || '#6B7280';
+        return `<tr>
           <td><strong>${q.number || ''}</strong></td>
           <td>${q.client_name || ''}</td>
           <td>${helpers.formatDate(q.quote_date)}</td>
           <td><strong>${helpers.formatMoney(q.total, this.state.company.currency || 'KES')}</strong></td>
-          <td><span style="background:${statusColor[q.status]||'#6B7280'}22;color:${statusColor[q.status]||'#6B7280'};padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;">${q.status || 'draft'}</span></td>
           <td>
-            <button class="button secondary" style="padding:5px 10px;font-size:12px;" data-preview-quote="${q.id}">👁 Preview</button>
+            <select data-status-quote="${q.id}" style="background:${clr}22;color:${clr};border:1px solid ${clr}55;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer;outline:none;">
+              ${['draft','pending','accepted','declined'].map(s =>
+                `<option value="${s}" ${st===s?'selected':''}>${statusLabel[s]}</option>`
+              ).join('')}
+            </select>
           </td>
-        </tr>`).join('')}
+          <td style="white-space:nowrap;">
+            <button class="button secondary" style="padding:5px 10px;font-size:12px;margin-right:4px;" data-preview-quote="${q.id}">👁 Preview</button>
+            <button class="button secondary" style="padding:5px 10px;font-size:12px;" data-edit-quote="${q.id}">✏ Edit</button>
+          </td>
+        </tr>`;
+      }).join('')}
       </tbody>
     </table>`;
   },
 
-  // NEW QUOTE FORM 
+  //  NEW QUOTE FORM 
 });
