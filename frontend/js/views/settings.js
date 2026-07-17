@@ -49,7 +49,7 @@ renderSettings() {
 
       <!-- Terms & Conditions -->
       <div class="card" style="margin-bottom:14px;">
-        <h3 style="font-size:14px;font-weight:800;margin-bottom:4px;color:var(--navy);">📋 Terms &amp; Conditions</h3>
+        <h3 style="font-size:14px;font-weight:800;margin-bottom:4px;color:var(--navy);"> Terms &amp; Conditions</h3>
         <p style="font-size:12px;color:var(--gray);margin-bottom:14px;">Each point appears as a bullet on every quote. Edit, remove or add points.</p>
         <div id="terms-list-editor">${termsRows}</div>
         <button id="add-term-btn" class="button secondary" style="margin-top:4px;font-size:12px;">+ Add Point</button>
