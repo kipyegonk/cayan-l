@@ -37,7 +37,7 @@ renderCatalog() {
               <td style="text-align:right;font-weight:700;">${sell>0 ? helpers.fmt(sell) : '—'}</td>
               <td style="text-align:center;white-space:nowrap;">
                 <button class="button secondary" style="padding:4px 10px;font-size:11px;margin-right:4px;" data-edit-catalog="${i.id}">✏ Edit</button>
-                <button class="button red" style="padding:4px 10px;font-size:11px;" data-del-catalog="${i.id}">🗑 Delete</button>
+                <button class="button red" style="padding:4px 10px;font-size:11px;" data-del-catalog="${i.id}"> Delete</button>
               </td>
             </tr>`;
           }).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--gray);padding:24px;">No catalog items yet. Click "+ Add Item" to start.</td></tr>'}</tbody>
