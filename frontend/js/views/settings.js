@@ -67,7 +67,7 @@ renderSettings() {
               style="border:2px solid var(--border);border-radius:8px;cursor:crosshair;background:#fff;touch-action:none;display:block;"></canvas>
             <div style="display:flex;gap:8px;margin-top:8px;">
               <button id="sig-clear-btn" class="button secondary" style="font-size:12px;padding:6px 12px;"> Clear</button>
-              <button id="sig-use-btn" class="button green" style="font-size:12px;padding:6px 12px;">✓ Use This</button>
+              <button id="sig-use-btn" class="button green" style="font-size:12px;padding:6px 12px;"> Use This</button>
             </div>
           </div>
           <!-- Upload or current -->
