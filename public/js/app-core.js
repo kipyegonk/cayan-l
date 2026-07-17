@@ -85,7 +85,7 @@ const app = {
 
 // Expose to window for inline handlers (onclick="app.setView(...)")
 try { window.app = app; } catch(e) { /* non-browser env */ }
-// ── Populate edit quote form 
+// Populate edit quote form 
 Object.assign(app, {
   populateEditQuote(quote) {
     // Update page title
