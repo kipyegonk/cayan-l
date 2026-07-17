@@ -153,7 +153,7 @@ renderAuth() {
           </td>
           <td style="white-space:nowrap;">
             <button class="button secondary" style="padding:5px 10px;font-size:12px;margin-right:4px;" data-preview-quote="${q.id}"> Preview</button>
-            <button class="button secondary" style="padding:5px 10px;font-size:12px;" data-edit-quote="${q.id}">✏ Edit</button>
+            <button class="button secondary" style="padding:5px 10px;font-size:12px;" data-edit-quote="${q.id}"> Edit</button>
           </td>
         </tr>`;
       }).join('')}
