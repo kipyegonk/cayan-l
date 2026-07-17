@@ -112,6 +112,24 @@ Object.assign(app, {
       });
     });
 
+    // Edit quote buttons
+    document.querySelectorAll('[data-edit-quote]').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const id = e.currentTarget.dataset.editQuote;
+        try {
+          const quote = await API.quotes.get(id);
+          // Store quote being edited in state
+          this.state.editingQuote = quote;
+          // Go to new quote view (reuses same form)
+          this.setView('newquote');
+          // After render, populate the form
+          setTimeout(() => this.populateEditQuote(quote), 100);
+        } catch(err) {
+          this.notify('Failed to load quote', 'error');
+        }
+      });
+    });
+
     // New Quote 
     if (document.getElementById('nq-items-container')) {
       // Single persistent delegated listener on the container for row events
@@ -195,9 +213,16 @@ Object.assign(app, {
         this.calcNewQuoteTotals();
         const data = this.collectNewQuoteData();
         if (!data.client_id) { this.notify('Please select a client', 'error'); return; }
-        const result = await API.quotes.create(data);
+        const editingId = this.state.editingQuote?.id;
+        let result;
+        if (editingId) {
+          result = await API.quotes.update(editingId, data);
+          this.state.editingQuote = null;
+        } else {
+          result = await API.quotes.create(data);
+        }
         if (result.id || result.success) {
-          this.notify('Quote saved!', 'success');
+          this.notify(editingId ? 'Quote updated!' : 'Quote saved!', 'success');
           await this.loadAppData();
           this.state.view = 'quotes';
           this.render();
