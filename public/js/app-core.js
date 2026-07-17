@@ -126,6 +126,6 @@ Object.assign(app, {
 
     // Update save button text
     const saveBtn = document.getElementById('nq-save-btn');
-    if (saveBtn) saveBtn.textContent = '💾 Update Quote';
+    if (saveBtn) saveBtn.textContent = ' Update Quote';
   },
 });
