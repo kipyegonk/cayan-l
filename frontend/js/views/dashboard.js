@@ -131,7 +131,7 @@ renderAuth() {
       return `<p style="text-align:center;color:var(--gray);padding:30px;">No quotes yet. <a href="#" onclick="app.setView('newquote')" style="color:var(--blue);">Create your first quote</a>.</p>`;
     }
     const statusColor = { draft: '#6B7280', pending: '#D97706', accepted: '#059669', declined: '#DC2626' };
-    const statusLabel = { draft: '📝 Draft', pending: '⏳ Pending', accepted: '✅ Accepted', declined: '❌ Declined' };
+    const statusLabel = { draft: ' Draft', pending: '⏳ Pending', accepted: '✅ Accepted', declined: '❌ Declined' };
     return `<table>
       <thead><tr>
         <th>Quote #</th><th>Client</th><th>Date</th><th>Total</th><th>Status</th><th>Actions</th>
