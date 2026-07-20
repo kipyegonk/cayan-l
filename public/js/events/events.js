@@ -364,41 +364,73 @@ Object.assign(app, {
     const cliModalBody = (c={}) => `
       <div class="form-grid">
         <div class="form-group full">
-          <label>Client / Company Name</label>
-          <input id="cli-name" class="input-field" placeholder="e.g. Joan Langat" style="margin:0;" value="${c.name||''}">
+          <label>Client / Company Name <span style="color:var(--red);">*</span></label>
+          <input id="cli-name" class="input-field" placeholder="e.g. Joan Langat Events Ltd" style="margin:0;" value="${c.name||''}">
         </div>
         <div class="form-group">
-          <label>Email</label>
-          <input id="cli-email" class="input-field" type="email" placeholder="client@email.com" style="margin:0;" value="${c.email||''}">
+          <label>Client Type <span style="color:var(--red);">*</span></label>
+          <select id="cli-type" class="input-field" style="margin:0;">
+            <option value="">-- Select Type --</option>
+            <option value="individual" ${c.type==='individual'?'selected':''}>Individual</option>
+            <option value="corporate" ${c.type==='corporate'?'selected':''}>Corporate / Company</option>
+            <option value="ngo" ${c.type==='ngo'?'selected':''}>NGO / Church / Organization</option>
+            <option value="government" ${c.type==='government'?'selected':''}>Government</option>
+          </select>
         </div>
         <div class="form-group">
-          <label>Phone</label>
+          <label>Contact Person <span style="color:var(--red);">*</span></label>
+          <input id="cli-contact" class="input-field" placeholder="Full name of contact" style="margin:0;" value="${c.contact_person||''}">
+        </div>
+        <div class="form-group">
+          <label>Phone Number <span style="color:var(--red);">*</span></label>
           <input id="cli-phone" class="input-field" placeholder="e.g. 0700 000 000" style="margin:0;" value="${c.phone||''}">
         </div>
         <div class="form-group">
-          <label>Contact Person</label>
-          <input id="cli-contact" class="input-field" placeholder="Contact person name" style="margin:0;" value="${c.contact_person||''}">
+          <label>WhatsApp Number</label>
+          <input id="cli-whatsapp" class="input-field" placeholder="e.g. 0712 345 678" style="margin:0;" value="${c.whatsapp||''}">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input id="cli-email" class="input-field" type="email" placeholder="client@email.com" style="margin:0;" value="${c.email||''}">
         </div>
         <div class="form-group">
           <label>Location / Area</label>
           <input id="cli-location" class="input-field" placeholder="e.g. Nairobi, Karen" style="margin:0;" value="${c.location||''}">
         </div>
+        <div class="form-group">
+          <label>KRA PIN</label>
+          <input id="cli-kra" class="input-field" placeholder="e.g. A000000000X" style="margin:0;" value="${c.kra_pin||''}">
+        </div>
         <div class="form-group full">
           <label>Full Address</label>
           <input id="cli-address" class="input-field" placeholder="Street / building / estate" style="margin:0;" value="${c.address||''}">
         </div>
+        <div class="form-group full">
+          <label>Notes / Special Requirements</label>
+          <textarea id="cli-notes" class="input-field" placeholder="Any special notes about this client..." style="margin:0;height:70px;resize:vertical;">${c.notes||''}</textarea>
+        </div>
       </div>`;
 
     const saveClient = async (close, id=null) => {
-      const name = document.getElementById('cli-name')?.value?.trim();
-      if (!name) { this.notify('Client name is required', 'error'); return; }
+      const name    = document.getElementById('cli-name')?.value?.trim();
+      const type    = document.getElementById('cli-type')?.value?.trim();
+      const contact = document.getElementById('cli-contact')?.value?.trim();
+      const phone   = document.getElementById('cli-phone')?.value?.trim();
+      if (!name)    { this.notify('Client name is required', 'error'); return; }
+      if (!type)    { this.notify('Please select a client type', 'error'); return; }
+      if (!contact) { this.notify('Contact person is required', 'error'); return; }
+      if (!phone)   { this.notify('Phone number is required', 'error'); return; }
       const payload = {
         name,
-        email:          document.getElementById('cli-email')?.value,
-        phone:          document.getElementById('cli-phone')?.value,
-        contact_person: document.getElementById('cli-contact')?.value,
-        location:       document.getElementById('cli-location')?.value,
-        address:        document.getElementById('cli-address')?.value,
+        type,
+        email:          document.getElementById('cli-email')?.value?.trim(),
+        phone,
+        whatsapp:       document.getElementById('cli-whatsapp')?.value?.trim(),
+        contact_person: contact,
+        location:       document.getElementById('cli-location')?.value?.trim(),
+        kra_pin:        document.getElementById('cli-kra')?.value?.trim(),
+        address:        document.getElementById('cli-address')?.value?.trim(),
+        notes:          document.getElementById('cli-notes')?.value?.trim(),
       };
       const result = id ? await API.clients.update(id, payload) : await API.clients.create(payload);
       if (result.id || result.success) {
