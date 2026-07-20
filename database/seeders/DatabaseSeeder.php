@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder
             User::create([
                 'name'     => 'Admin',
                 'email'    => 'admin@company.com',
-                'password' => Hash::make('admin123'),
+                'password' => Hash::make('********'),
                 'role'     => 'admin',
                 'verified' => true,
             ]);
         }
         Company::getSingleton();
-        $this->command->info('Done! Login: admin@company.com / admin123');
+        $this->command->info('Done! Login: admin@company.com / ********');
     }
 }
