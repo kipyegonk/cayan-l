@@ -49,15 +49,19 @@ const app = {
   },
 
   async loadAppData() {
-    const [company, catalog, clients, quotes, stats] = await Promise.all([
+    const isAdmin = this.state.user?.role === 'admin';
+    const calls = [
       API.company.get(), API.catalog.getAll(), API.clients.getAll(),
       API.quotes.getAll(), API.stats.get(),
-    ]);
+      isAdmin ? API.users.getAll() : Promise.resolve([]),
+    ];
+    const [company, catalog, clients, quotes, stats, users] = await Promise.all(calls);
     this.state.company = company || {};
     this.state.catalog = catalog || [];
     this.state.clients = clients || [];
     this.state.quotes = quotes || [];
     this.state.stats = stats || {};
+    this.state.users = Array.isArray(users) ? users : [];
     this.state.loading = false;
     this.render();
   },
