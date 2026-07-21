@@ -74,10 +74,15 @@ class UserController extends Controller
         ]);
 
         // Log credentials to Render logs
-        \Log::info("NEW USER: email={$user->email} password={$plainPassword}");
+        \Log::info("NEW USER CREATED: email={$user->email} | password={$plainPassword}");
 
-        // Send email directly with short timeout
-        $this->sendWelcomeEmail($user, $plainPassword);
+        // Try sending email — won't block if it fails
+        try {
+            config(['mail.mailers.smtp.timeout' => 5]);
+            $this->sendWelcomeEmail($user, $plainPassword);
+        } catch (\Exception $e) {
+            \Log::warning("Email failed for {$user->email}: " . $e->getMessage());
+        }
 
         return response()->json(['success' => true, 'id' => $user->id, 'temp_password' => $plainPassword], 201);
     }
