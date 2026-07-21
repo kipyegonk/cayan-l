@@ -467,7 +467,174 @@ Object.assign(app, {
       });
     });
 
-    // Users (admin only) 
+    // ── Users (admin only) ─────────────────────────────────────
+
+    // User modal body builder
+    const usrModalBody = (u={}) => {
+      const MODULES = ['catalog','clients','quotes','stats','settings'];
+      const perms = u.permissions || {};
+      const ck = (m,a) => (perms[m]&&perms[m][a]) ? 'checked' : '';
+      return `
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Full Name <span style="color:var(--red);">*</span></label>
+            <input id="usr-name" class="input-field" placeholder="Full name" style="margin:0;" value="${u.name||''}">
+          </div>
+          <div class="form-group">
+            <label>Email Address <span style="color:var(--red);">*</span></label>
+            <input id="usr-email" class="input-field" type="email" placeholder="user@email.com" style="margin:0;" value="${u.email||''}">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input id="usr-phone" class="input-field" placeholder="e.g. 0700 000 000" style="margin:0;" value="${u.phone||''}">
+          </div>
+          <div class="form-group">
+            <label>Job Title</label>
+            <input id="usr-title" class="input-field" placeholder="e.g. Events Coordinator" style="margin:0;" value="${u.job_title||''}">
+          </div>
+          <div class="form-group">
+            <label>Department</label>
+            <select id="usr-dept" class="input-field" style="margin:0;">
+              <option value="">-- Select --</option>
+              ${['Operations','Sales','Finance','Logistics','Design','Management'].map(d =>
+                `<option value="${d}" ${u.department===d?'selected':''}>${d}</option>`).join('')}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Role <span style="color:var(--red);">*</span></label>
+            <select id="usr-role" class="input-field" style="margin:0;" onchange="document.getElementById('usr-perms-section').style.display=this.value==='admin'?'none':'block'">
+              <option value="user" ${(!u.role||u.role==='user')?'selected':''}>Staff / User</option>
+              <option value="admin" ${u.role==='admin'?'selected':''}>Admin (Full Access)</option>
+            </select>
+          </div>
+        </div>
+        ${!u.id ? `<p style="background:#fdf8f0;border:1px solid #e8d5b0;border-radius:8px;padding:10px 14px;font-size:12px;color:#6B7280;margin:12px 0;">
+          🔑 A secure password will be auto-generated and emailed to the user.
+        </p>` : ''}
+        <div id="usr-perms-section" style="display:${u.role==='admin'?'none':'block'};">
+          <div style="font-size:13px;font-weight:700;color:#374151;margin:16px 0 10px;padding-top:12px;border-top:1px solid #e5e7eb;">
+            🔐 Module Permissions
+          </div>
+          <div style="overflow-x:auto;">
+            <table style="font-size:12px;width:100%;border-collapse:collapse;">
+              <thead>
+                <tr>
+                  <th style="text-align:left;padding:6px 8px;background:#760014;color:#D0A95E;">Module</th>
+                  <th style="padding:6px 8px;background:#760014;color:#D0A95E;text-align:center;">View</th>
+                  <th style="padding:6px 8px;background:#760014;color:#D0A95E;text-align:center;">Add</th>
+                  <th style="padding:6px 8px;background:#760014;color:#D0A95E;text-align:center;">Edit</th>
+                  <th style="padding:6px 8px;background:#760014;color:#D0A95E;text-align:center;">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${MODULES.map((m,i) => {
+                  const actions = m==='stats'?['view']:m==='settings'?['view','edit']:['view','add','edit','delete'];
+                  return `<tr style="background:${i%2?'#fafafa':'#fff'}">
+                    <td style="padding:7px 8px;font-weight:600;text-transform:capitalize;border-bottom:1px solid #eee;">${m}</td>
+                    ${['view','add','edit','delete'].map(a => actions.includes(a) ?
+                      `<td style="text-align:center;border-bottom:1px solid #eee;padding:7px;">
+                        <input type="checkbox" name="perm_${m}_${a}" ${ck(m,a)} style="width:15px;height:15px;cursor:pointer;">
+                      </td>` :
+                      `<td style="text-align:center;border-bottom:1px solid #eee;padding:7px;color:#D1D5DB;">—</td>`
+                    ).join('')}
+                  </tr>`;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>`;
+    };
+
+    const collectPermissions = () => {
+      const MODULES = ['catalog','clients','quotes','stats','settings'];
+      const perms = {};
+      MODULES.forEach(m => {
+        const actions = m==='stats'?['view']:m==='settings'?['view','edit']:['view','add','edit','delete'];
+        perms[m] = {};
+        actions.forEach(a => {
+          const cb = document.querySelector(`input[name="perm_${m}_${a}"]`);
+          perms[m][a] = cb ? cb.checked : false;
+        });
+      });
+      return perms;
+    };
+
+    const saveUser = async (close, id=null) => {
+      const name  = document.getElementById('usr-name')?.value?.trim();
+      const email = document.getElementById('usr-email')?.value?.trim();
+      const role  = document.getElementById('usr-role')?.value;
+      if (!name)  { this.notify('Full name is required', 'error'); return; }
+      if (!email) { this.notify('Email address is required', 'error'); return; }
+      if (!role)  { this.notify('Please select a role', 'error'); return; }
+      const payload = {
+        name, email, role,
+        phone:       document.getElementById('usr-phone')?.value?.trim(),
+        job_title:   document.getElementById('usr-title')?.value?.trim(),
+        department:  document.getElementById('usr-dept')?.value,
+        permissions: role === 'admin' ? null : collectPermissions(),
+      };
+      const result = id ? await API.users.update(id, payload) : await API.users.create(payload);
+      if (result.id || result.success) {
+        this.notify(id ? 'User updated!' : 'User created! Credentials sent to email.');
+        close();
+        const users = await API.users.getAll();
+        this.state.users = users || [];
+        this.state.view = 'users';
+        this.render();
+      } else { this.notify(result.error || 'Failed to save user', 'error'); }
+    };
+
+    document.getElementById('usr-add-btn')?.addEventListener('click', () => {
+      this.showModal('Add User', usrModalBody(), (modal, close) => saveUser(close));
+    });
+
+    // Edit user
+    document.querySelectorAll('[data-edit-user]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.dataset.editUser;
+        const user = (this.state.users||[]).find(u => String(u.id)===String(id));
+        if (!user) return;
+        this.showModal(`Edit User — ${user.name}`, usrModalBody(user), (modal, close) => saveUser(close, id));
+      });
+    });
+
+    // Permissions quick-edit
+    document.querySelectorAll('[data-perms-user]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.dataset.permsUser;
+        const user = (this.state.users||[]).find(u => String(u.id)===String(id));
+        if (!user) return;
+        if (user.role === 'admin') { this.notify('Admins have full access to everything', 'error'); return; }
+        this.showModal(`Permissions — ${user.name}`, usrModalBody(user), async (modal, close) => {
+          const perms = collectPermissions();
+          const result = await API.users.update(id, { permissions: perms });
+          if (result.success) {
+            this.notify('Permissions updated!');
+            close();
+            const users = await API.users.getAll();
+            this.state.users = users || [];
+            this.state.view = 'users';
+            this.render();
+          } else { this.notify('Failed to update permissions', 'error'); }
+        }, '💾 Save Permissions');
+      });
+    });
+
+    // Delete user
+    document.querySelectorAll('[data-del-user]').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const id = e.currentTarget.dataset.delUser;
+        const user = (this.state.users||[]).find(u => String(u.id)===String(id));
+        if (!confirm(`Delete user "${user?.name}"? This cannot be undone.`)) return;
+        const result = await API.users.delete(id);
+        if (result.success) {
+          this.notify('User deleted');
+          this.state.users = (this.state.users||[]).filter(u => String(u.id)!==String(id));
+          this.render();
+        } else { this.notify(result.error || 'Failed to delete user', 'error'); }
+      });
+    });
+
     // Change password for any user (admin)
     document.querySelectorAll('[data-change-pwd]').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -495,43 +662,7 @@ Object.assign(app, {
       });
     });
 
-    document.getElementById('usr-add-btn')?.addEventListener('click', () => {
-      this.showModal('Add User', `
-        <div class="form-grid">
-          <div class="form-group full"><label>Full Name</label><input id="usr-name" class="input-field" placeholder="Full name" style="margin:0;"></div>
-          <div class="form-group"><label>Email</label><input id="usr-email" class="input-field" type="email" placeholder="user@email.com" style="margin:0;"></div>
-          <div class="form-group"><label>Password</label><input id="usr-pass" class="input-field" type="password" placeholder="Min. 6 characters" style="margin:0;"></div>
-          <div class="form-group"><label>Role</label>
-            <select id="usr-role" class="input-field" style="margin:0;">
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
-          <div class="form-group" style="flex-direction:row;align-items:center;gap:8px;">
-            <input type="checkbox" id="usr-verified" style="width:16px;height:16px;">
-            <label style="text-transform:none;letter-spacing:0;font-size:13px;margin:0;">Mark as verified</label>
-          </div>
-        </div>`, async (modal, close) => {
-        const name = document.getElementById('usr-name')?.value?.trim();
-        const email = document.getElementById('usr-email')?.value?.trim();
-        const password = document.getElementById('usr-pass')?.value;
-        if (!name || !email || !password) { this.notify('All fields required', 'error'); return; }
-        if (password.length < 6) { this.notify('Password must be at least 6 characters', 'error'); return; }
-        const result = await API.users.create({
-          name, email, password,
-          role: document.getElementById('usr-role')?.value || 'user',
-          verified: document.getElementById('usr-verified')?.checked ? 1 : 0,
-        });
-        if (result.id || result.success) {
-          this.notify('User created!');
-          close();
-          const users = await API.users.getAll();
-          this.state.users = users || [];
-          this.state.view = 'users';
-          this.render();
-        } else { this.notify(result.error || 'Failed to create user', 'error'); }
-      });
-    });
+
 
     // Change own password (Settings page) 
     document.getElementById('change-pwd-btn')?.addEventListener('click', async () => {
