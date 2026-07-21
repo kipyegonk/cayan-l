@@ -73,8 +73,13 @@ class UserController extends Controller
             'verified'    => true,
         ]);
 
-        // Send credentials email
-        $this->sendWelcomeEmail($user, $plainPassword);
+        // Send credentials email after response (non-blocking)
+        $userId = $user->id;
+        $password = $plainPassword;
+        $u = $user;
+        app()->terminating(function() use ($u, $password) {
+            $this->sendWelcomeEmail($u, $password);
+        });
 
         return response()->json(['success' => true, 'id' => $user->id], 201);
     }
