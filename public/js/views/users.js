@@ -44,7 +44,7 @@ renderUsers() {
 
       <!-- Permissions legend -->
       <div class="card" style="border-top-color:#374151;">
-        <h3 style="font-size:13px;font-weight:700;color:#374151;margin-bottom:12px;">🔐 Permissions Overview</h3>
+        <h3 style="font-size:13px;font-weight:700;color:#374151;margin-bottom:12px;"> Permissions Overview</h3>
         <div style="overflow-x:auto;">
           <table style="font-size:12px;">
             <thead><tr>
