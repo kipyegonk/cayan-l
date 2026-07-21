@@ -33,7 +33,7 @@ renderUsers() {
               <td><span style="background:${u.role==='admin'?'#760014':'#374151'};color:#D0A95E;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;">${u.role.toUpperCase()}</span></td>
               <td>${u.verified?'✅ Active':'⏳ Pending'}</td>
               <td style="white-space:nowrap;">
-                <button class="button secondary" style="padding:4px 8px;font-size:11px;margin-right:4px;" data-edit-user="${u.id}">✏ Edit</button>
+                <button class="button secondary" style="padding:4px 8px;font-size:11px;margin-right:4px;" data-edit-user="${u.id}"> Edit</button>
                 <button class="button secondary" style="padding:4px 8px;font-size:11px;margin-right:4px;" data-perms-user="${u.id}"> Perms</button>
                 <button class="button red" style="padding:4px 8px;font-size:11px;" data-del-user="${u.id}">Delete</button>
               </td>
