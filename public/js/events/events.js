@@ -513,7 +513,7 @@ Object.assign(app, {
         </p>` : ''}
         <div id="usr-perms-section" style="display:${u.role==='admin'?'none':'block'};">
           <div style="font-size:13px;font-weight:700;color:#374151;margin:16px 0 10px;padding-top:12px;border-top:1px solid #e5e7eb;">
-            🔐 Module Permissions
+             Module Permissions
           </div>
           <div style="overflow-x:auto;">
             <table style="font-size:12px;width:100%;border-collapse:collapse;">
