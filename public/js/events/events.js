@@ -575,8 +575,32 @@ Object.assign(app, {
       };
       const result = id ? await API.users.update(id, payload) : await API.users.create(payload);
       if (result.id || result.success) {
-        this.notify(id ? 'User updated!' : 'User created! Credentials sent to email.');
         close();
+        // Show credentials popup if new user
+        if (!id && result.temp_password) {
+          setTimeout(() => {
+            this.showModal('🔑 User Created — Save Credentials', `
+              <div style="background:#fdf8f0;border:2px solid #D0A95E;border-radius:10px;padding:20px;margin-bottom:16px;">
+                <p style="font-size:13px;color:#6B7280;margin-bottom:12px;">Share these credentials with the user. This is the only time the password will be shown.</p>
+                <table style="width:100%;font-size:14px;border-collapse:collapse;">
+                  <tr><td style="padding:8px 0;color:#6B7280;width:120px;">Name</td><td style="padding:8px 0;font-weight:700;">${payload.name}</td></tr>
+                  <tr><td style="padding:8px 0;color:#6B7280;">Email</td><td style="padding:8px 0;font-weight:700;">${payload.email}</td></tr>
+                  <tr style="background:#760014;border-radius:6px;">
+                    <td style="padding:10px 8px;color:#D0A95E;font-weight:700;">Password</td>
+                    <td style="padding:10px 8px;color:#D0A95E;font-weight:900;font-size:18px;letter-spacing:2px;">${result.temp_password}</td>
+                  </tr>
+                  <tr><td style="padding:8px 0;color:#6B7280;">Login URL</td><td style="padding:8px 0;"><a href="https://cayan-l.vercel.app" target="_blank">cayan-l.vercel.app</a></td></tr>
+                </table>
+              </div>
+              <button onclick="navigator.clipboard.writeText('Email: ${payload.email}\nPassword: ${result.temp_password}').then(()=>this.textContent='✅ Copied')" 
+                style="width:100%;padding:10px;background:#760014;color:#D0A95E;border:none;border-radius:7px;font-weight:700;cursor:pointer;font-size:13px;">
+                📋 Copy Credentials
+              </button>
+            `, (modal, close2) => close2(), 'Close');
+          }, 100);
+        } else {
+          this.notify(id ? 'User updated!' : 'User created!');
+        }
         const users = await API.users.getAll();
         this.state.users = users || [];
         this.state.view = 'users';
