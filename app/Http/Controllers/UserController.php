@@ -73,13 +73,16 @@ class UserController extends Controller
             'verified'    => true,
         ]);
 
-        // Send credentials email after response (non-blocking)
-        $userId = $user->id;
-        $password = $plainPassword;
-        $u = $user;
-        app()->terminating(function() use ($u, $password) {
-            $this->sendWelcomeEmail($u, $password);
-        });
+        // Log password to Render logs (visible in dashboard)
+        \Log::info("NEW USER CREATED: {$user->email} | TEMP PASSWORD: {$plainPassword}");
+
+        // Send email in background (fire and forget)
+        try {
+            $cmd = "php " . base_path('artisan') . " mail:send-welcome {$user->id} " . escapeshellarg($plainPassword) . " > /dev/null 2>&1 &";
+            exec($cmd);
+        } catch (\Exception $e) {
+            // Ignore
+        }
 
         return response()->json(['success' => true, 'id' => $user->id], 201);
     }
