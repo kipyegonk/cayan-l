@@ -509,7 +509,7 @@ Object.assign(app, {
           </div>
         </div>
         ${!u.id ? `<p style="background:#fdf8f0;border:1px solid #e8d5b0;border-radius:8px;padding:10px 14px;font-size:12px;color:#6B7280;margin:12px 0;">
-          🔑 A secure password will be auto-generated and emailed to the user.
+           A secure password will be auto-generated and emailed to the user.
         </p>` : ''}
         <div id="usr-perms-section" style="display:${u.role==='admin'?'none':'block'};">
           <div style="font-size:13px;font-weight:700;color:#374151;margin:16px 0 10px;padding-top:12px;border-top:1px solid #e5e7eb;">
