@@ -73,18 +73,13 @@ class UserController extends Controller
             'verified'    => true,
         ]);
 
-        // Log password to Render logs (visible in dashboard)
-        \Log::info("NEW USER CREATED: {$user->email} | TEMP PASSWORD: {$plainPassword}");
+        // Log credentials to Render logs
+        \Log::info("NEW USER: email={$user->email} password={$plainPassword}");
 
-        // Send email in background (fire and forget)
-        try {
-            $cmd = "php " . base_path('artisan') . " mail:send-welcome {$user->id} " . escapeshellarg($plainPassword) . " > /dev/null 2>&1 &";
-            exec($cmd);
-        } catch (\Exception $e) {
-            // Ignore
-        }
+        // Send email directly with short timeout
+        $this->sendWelcomeEmail($user, $plainPassword);
 
-        return response()->json(['success' => true, 'id' => $user->id], 201);
+        return response()->json(['success' => true, 'id' => $user->id, 'temp_password' => $plainPassword], 201);
     }
 
     public function update(Request $request, User $user)
@@ -112,6 +107,8 @@ class UserController extends Controller
     private function sendWelcomeEmail(User $user, string $password): void
     {
         try {
+            // Short timeout so it doesn't hang
+            config(['mail.mailers.smtp.timeout' => 8]);
             $appName    = config('app.name', 'Cayan Events');
             $appUrl     = config('app.url', 'https://cayan-l.vercel.app');
             $emailBody  = "
