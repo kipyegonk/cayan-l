@@ -21,7 +21,7 @@ class User extends Authenticatable
 
     public function isAdmin(): bool { return $this->role === 'admin'; }
 
-    public function can(string $module, string $action): bool
+    public function hasPermission(string $module, string $action): bool
     {
         if ($this->role === 'admin') return true;
         return (bool) ($this->permissions[$module][$action] ?? false);
