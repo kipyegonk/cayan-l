@@ -72,12 +72,25 @@ class AuthController extends Controller
 
     private function userArray(User $user): array
     {
+        // Default permissions for admin
+        $defaultAdminPerms = [
+            'catalog'  => ['view'=>true,'add'=>true,'edit'=>true,'delete'=>true],
+            'clients'  => ['view'=>true,'add'=>true,'edit'=>true,'delete'=>true],
+            'quotes'   => ['view'=>true,'add'=>true,'edit'=>true,'delete'=>true],
+            'users'    => ['view'=>true,'add'=>true,'edit'=>true,'delete'=>true],
+            'settings' => ['view'=>true,'edit'=>true],
+            'stats'    => ['view'=>true],
+        ];
+
         return [
-            'id'       => $user->id,
-            'name'     => $user->name,
-            'email'    => $user->email,
-            'role'     => $user->role,
-            'verified' => $user->verified,
+            'id'          => $user->id,
+            'name'        => $user->name,
+            'email'       => $user->email,
+            'role'        => $user->role,
+            'verified'    => $user->verified,
+            'permissions' => $user->role === 'admin'
+                ? $defaultAdminPerms
+                : ($user->permissions ?? []),
         ];
     }
 }
