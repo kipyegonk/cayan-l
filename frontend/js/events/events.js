@@ -579,7 +579,7 @@ Object.assign(app, {
         // Show credentials popup if new user
         if (!id && result.temp_password) {
           setTimeout(() => {
-            this.showModal('🔑 User Created — Save Credentials', `
+            this.showModal(' User Created — Save Credentials', `
               <div style="background:#fdf8f0;border:2px solid #D0A95E;border-radius:10px;padding:20px;margin-bottom:16px;">
                 <p style="font-size:13px;color:#6B7280;margin-bottom:12px;">Share these credentials with the user. This is the only time the password will be shown.</p>
                 <table style="width:100%;font-size:14px;border-collapse:collapse;">
