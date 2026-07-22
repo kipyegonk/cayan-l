@@ -14,6 +14,26 @@ const app = {
     this.render();
     setTimeout(() => { this.state.toast = null; this.render(); }, 3200);
   },
+  // Check if current user has permission for module+action
+  hasPermission(module, action) {
+    const user = this.state.user;
+    if (!user) return false;
+    if (user.role === 'admin') return true;
+    const perms = user.permissions || {};
+    return !!(perms[module] && perms[module][action]);
+  },
+
+  // Map view names to modules
+  viewModule(view) {
+    const map = {
+      quotes: 'quotes', newquote: 'quotes',
+      catalog: 'catalog', clients: 'clients',
+      settings: 'settings', users: 'users',
+      dashboard: null,
+    };
+    return map[view] || null;
+  },
+
   setView(view) { this.state.view = view; this.render(); },
 
   async handleLogin(email, password) {
