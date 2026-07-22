@@ -90,8 +90,8 @@ renderNewQuote() {
         </div>
 
         <div style="display:flex;gap:12px;margin-top:20px;justify-content:flex-end;">
-          <button class="button secondary" id="nq-preview-btn"> Preview</button>
-          <button class="button green" id="nq-save-btn"> Save Quote</button>
+          <button class="button secondary" id="nq-preview-btn">👁 Preview</button>
+          ${(app.hasPermission('quotes','add') || app.hasPermission('quotes','edit')) ? '<button class="button green" id="nq-save-btn">💾 Save Quote</button>' : ''}
         </div>
       </div>
     </div>`;
