@@ -9,10 +9,10 @@ renderCatalog() {
       <div class="page-header">
         <div><h2 class="page-title">Catalog</h2><p class="page-subtitle">${items.length} items</p></div>
         <div class="btn-group">
-          <button class="button secondary" id="cat-export-btn">⬇ Export Excel</button>
-          <button class="button secondary" id="cat-import-btn">⬆ Import Excel</button>
+          ${app.hasPermission('catalog','view') ? '<button class="button secondary" id="cat-export-btn">⬇ Export Excel</button>' : ''}
+          ${app.hasPermission('catalog','add') ? '<button class="button secondary" id="cat-import-btn">⬆ Import Excel</button>' : ''}
           <input type="file" id="cat-import-file" accept=".xlsx,.xls,.csv" style="display:none;">
-          <button class="button" id="cat-add-btn">+ Add Item</button>
+          ${app.hasPermission('catalog','add') ? '<button class="button" id="cat-add-btn">+ Add Item</button>' : ''}
         </div>
       </div>
       <div class="card">
