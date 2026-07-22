@@ -640,7 +640,7 @@ Object.assign(app, {
             this.state.view = 'users';
             this.render();
           } else { this.notify('Failed to update permissions', 'error'); }
-        }, '💾 Save Permissions');
+        }, ' Save Permissions');
       });
     });
 
