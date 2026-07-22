@@ -145,11 +145,14 @@ renderAuth() {
           <td>${helpers.formatDate(q.quote_date)}</td>
           <td><strong>${helpers.formatMoney(q.total, this.state.company.currency || 'KES')}</strong></td>
           <td>
-            ${app.hasPermission('quotes','edit') ? `<select data-status-quote="${q.id}"`  : '<span style="background:'+clr+'22;color:'+clr+';padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;">'+ statusLabel[st] +'</span>'} ${app.hasPermission('quotes','edit') ? ` style="background:${clr}22;color:${clr};border:1px solid ${clr}55;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer;outline:none;">
-              ${['draft','pending','accepted','declined'].map(s =>
-                `<option value="${s}" ${st===s?'selected':''}>${statusLabel[s]}</option>`
-              ).join('')}
-            </select>
+            ${app.hasPermission('quotes','edit') ? `
+              <select data-status-quote="${q.id}" style="background:${clr}22;color:${clr};border:1px solid ${clr}55;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer;outline:none;">
+                ${['draft','pending','accepted','declined'].map(s =>
+                  `<option value="${s}" ${st===s?'selected':''}>${statusLabel[s]}</option>`
+                ).join('')}
+              </select>` :
+              `<span style="background:${clr}22;color:${clr};padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;">${statusLabel[st]}</span>`
+            }
           </td>
           <td style="white-space:nowrap;">
             <button class="button secondary" style="padding:5px 10px;font-size:12px;margin-right:4px;" data-preview-quote="${q.id}">👁 Preview</button>
