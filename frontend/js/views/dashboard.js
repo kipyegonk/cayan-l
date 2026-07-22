@@ -100,7 +100,7 @@ renderAuth() {
     return `<div class="view-wrap">
       <div class="page-header">
         <div><h2 class="page-title">Dashboard</h2><p class="page-subtitle">Overview of your quotation activity</p></div>
-        <button class="button" onclick="app.setView('newquote')">+ New Quote</button>
+        ${app.hasPermission('quotes','add') ? '<button class="button" onclick="app.setView(\'newquote\')">+ New Quote</button>' : ''}
       </div>
       <div class="stats-grid">
         <div class="stat-card"><div class="stat-icon">📄</div><div class="stat-label">Total Quotes</div><div class="stat-value">${s.total_quotes || 0}</div></div>
@@ -120,7 +120,7 @@ renderAuth() {
     return `<div class="view-wrap">
       <div class="page-header">
         <div><h2 class="page-title">All Quotes</h2><p class="page-subtitle">${this.state.quotes.length} total quotes</p></div>
-        <button class="button" onclick="app.setView('newquote')">+ New Quote</button>
+        ${app.hasPermission('quotes','add') ? '<button class="button" onclick="app.setView(\'newquote\')">+ New Quote</button>' : ''}
       </div>
       <div class="card">${this.renderQuotesTable(this.state.quotes)}</div>
     </div>`;
@@ -145,15 +145,15 @@ renderAuth() {
           <td>${helpers.formatDate(q.quote_date)}</td>
           <td><strong>${helpers.formatMoney(q.total, this.state.company.currency || 'KES')}</strong></td>
           <td>
-            <select data-status-quote="${q.id}" style="background:${clr}22;color:${clr};border:1px solid ${clr}55;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer;outline:none;">
+            ${app.hasPermission('quotes','edit') ? `<select data-status-quote="${q.id}"`  : '<span style="background:'+clr+'22;color:'+clr+';padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;">'+ statusLabel[st] +'</span>'} ${app.hasPermission('quotes','edit') ? ` style="background:${clr}22;color:${clr};border:1px solid ${clr}55;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer;outline:none;">
               ${['draft','pending','accepted','declined'].map(s =>
                 `<option value="${s}" ${st===s?'selected':''}>${statusLabel[s]}</option>`
               ).join('')}
             </select>
           </td>
           <td style="white-space:nowrap;">
-            <button class="button secondary" style="padding:5px 10px;font-size:12px;margin-right:4px;" data-preview-quote="${q.id}"> Preview</button>
-            <button class="button secondary" style="padding:5px 10px;font-size:12px;" data-edit-quote="${q.id}"> Edit</button>
+            <button class="button secondary" style="padding:5px 10px;font-size:12px;margin-right:4px;" data-preview-quote="${q.id}">👁 Preview</button>
+            ${app.hasPermission('quotes','edit') ? `<button class="button secondary" style="padding:5px 10px;font-size:12px;" data-edit-quote="${q.id}">✏ Edit</button>` : ''}
           </td>
         </tr>`;
       }).join('')}
