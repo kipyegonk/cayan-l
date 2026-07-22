@@ -6,7 +6,7 @@ renderClients() {
     return `<div class="view-wrap">
       <div class="page-header">
         <div><h2 class="page-title">Clients</h2><p class="page-subtitle">${clients.length} clients</p></div>
-        <button class="button" id="cli-add-btn">+ Add Client</button>
+        ${app.hasPermission('clients','add') ? '<button class="button" id="cli-add-btn">+ Add Client</button>' : ''}
       </div>
       <div class="card">
         <table>
