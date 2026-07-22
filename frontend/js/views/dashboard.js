@@ -53,13 +53,13 @@ renderAuth() {
 
   renderAppShell() {
     const navItems = [
-      { id: 'dashboard', emoji: '⊞', label: 'Dashboard' },
-      { id: 'newquote',  emoji: '📝', label: 'New Quote' },
-      { id: 'quotes',    emoji: '📄', label: 'All Quotes' },
-      { id: 'catalog',   emoji: '📦', label: 'Catalog' },
-      { id: 'clients',   emoji: '👥', label: 'Clients' },
-      ...(this.state.user?.role === 'admin' ? [{ id: 'users', emoji: '🔑', label: 'Users' }] : []),
-      { id: 'settings',  emoji: '⚙️', label: 'Settings' },
+      { id: 'dashboard', emoji: '⊞', label: 'Dashboard', module: null },
+      ...(this.hasPermission('quotes','add') ? [{ id: 'newquote', emoji: '📝', label: 'New Quote', module: 'quotes' }] : []),
+      ...(this.hasPermission('quotes','view') ? [{ id: 'quotes', emoji: '📄', label: 'All Quotes', module: 'quotes' }] : []),
+      ...(this.hasPermission('catalog','view') ? [{ id: 'catalog', emoji: '📦', label: 'Catalog', module: 'catalog' }] : []),
+      ...(this.hasPermission('clients','view') ? [{ id: 'clients', emoji: '👥', label: 'Clients', module: 'clients' }] : []),
+      ...(this.state.user?.role === 'admin' ? [{ id: 'users', emoji: '🔑', label: 'Users', module: 'users' }] : []),
+      ...(this.hasPermission('settings','view') ? [{ id: 'settings', emoji: '⚙️', label: 'Settings', module: 'settings' }] : []),
     ];
     return `<button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
       <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
