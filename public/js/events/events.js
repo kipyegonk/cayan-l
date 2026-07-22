@@ -90,7 +90,7 @@ Object.assign(app, {
     });
 
     // Quote status change dropdowns
-    document.querySelectorAll('[data-status-quote]').forEach(sel => {
+    if (app.hasPermission('quotes','edit')) document.querySelectorAll('[data-status-quote]').forEach(sel => {
       sel.addEventListener('change', async (e) => {
         const id     = e.currentTarget.dataset.statusQuote;
         const status = e.currentTarget.value;
@@ -113,7 +113,7 @@ Object.assign(app, {
     });
 
     // Edit quote buttons
-    document.querySelectorAll('[data-edit-quote]').forEach(btn => {
+    if (app.hasPermission('quotes','edit')) document.querySelectorAll('[data-edit-quote]').forEach(btn => {
       btn.addEventListener('click', async (e) => {
         const id = e.currentTarget.dataset.editQuote;
         try {
@@ -318,7 +318,7 @@ Object.assign(app, {
       } else { this.notify(result.error || 'Failed to save', 'error'); }
     };
 
-    document.getElementById('cat-add-btn')?.addEventListener('click', () => {
+    if (app.hasPermission('catalog','add')) document.getElementById('cat-add-btn')?.addEventListener('click', () => {
       this.showModal('Add Catalog Item', catModalBody(), (modal, close) => saveCatalogItem(close));
     });
 
@@ -328,7 +328,7 @@ Object.assign(app, {
     });
 
     // Import catalog from Excel/CSV
-    document.getElementById('cat-import-btn')?.addEventListener('click', () => {
+    if (app.hasPermission('catalog','add')) document.getElementById('cat-import-btn')?.addEventListener('click', () => {
       document.getElementById('cat-import-file')?.click();
     });
 
@@ -339,7 +339,7 @@ Object.assign(app, {
       e.target.value = ''; // reset so same file can be re-imported
     });
 
-    document.querySelectorAll('[data-edit-catalog]').forEach(btn => {
+    if (app.hasPermission('catalog','edit')) document.querySelectorAll('[data-edit-catalog]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const id = e.currentTarget.dataset.editCatalog;
         const item = (this.state.catalog||[]).find(i => String(i.id) === String(id));
@@ -348,7 +348,7 @@ Object.assign(app, {
       });
     });
 
-    document.querySelectorAll('[data-del-catalog]').forEach(btn => {
+    if (app.hasPermission('catalog','delete')) document.querySelectorAll('[data-del-catalog]').forEach(btn => {
       btn.addEventListener('click', async (e) => {
         const id = e.currentTarget.dataset.delCatalog;
         if (!confirm('Delete this catalog item?')) return;
@@ -442,11 +442,11 @@ Object.assign(app, {
       } else { this.notify(result.error || 'Failed to save client', 'error'); }
     };
 
-    document.getElementById('cli-add-btn')?.addEventListener('click', () => {
+    if (app.hasPermission('clients','add')) document.getElementById('cli-add-btn')?.addEventListener('click', () => {
       this.showModal('Add Client', cliModalBody(), (modal, close) => saveClient(close));
     });
 
-    document.querySelectorAll('[data-edit-client]').forEach(btn => {
+    if (app.hasPermission('clients','edit')) document.querySelectorAll('[data-edit-client]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const id = e.currentTarget.dataset.editClient;
         const client = (this.state.clients||[]).find(c => String(c.id) === String(id));
@@ -455,7 +455,7 @@ Object.assign(app, {
       });
     });
 
-    document.querySelectorAll('[data-del-client]').forEach(btn => {
+    if (app.hasPermission('clients','delete')) document.querySelectorAll('[data-del-client]').forEach(btn => {
       btn.addEventListener('click', async (e) => {
         const id = e.currentTarget.dataset.delClient;
         if (!confirm('Delete this client?')) return;
