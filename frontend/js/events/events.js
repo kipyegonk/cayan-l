@@ -467,7 +467,7 @@ Object.assign(app, {
       });
     });
 
-    // ── Users (admin only) 
+    // Users (admin only) 
 
     // User modal body builder
     const usrModalBody = (u={}) => {
