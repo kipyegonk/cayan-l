@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Models\AuditLog;
 use App\Models\Client;
 
 class ClientController extends Controller
@@ -22,6 +23,7 @@ class ClientController extends Controller
             'name','email','phone',
             'contact_person','location','address'
         ]));
+        AuditLog::record('create','clients','Client: '.$client->name,'Created new client',$request);
         return response()->json(['success' => true, 'id' => $client->id], 201);
     }
 
