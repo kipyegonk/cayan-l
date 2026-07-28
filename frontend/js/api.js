@@ -48,6 +48,7 @@ const API = {
     }
   },
   auth: {
+    logout: () => API.request('auth/logout', 'POST'),
     login: (email, password) => API.request('auth/login', 'POST', { email, password }),
     register: (name, email, password) => API.request('auth/register', 'POST', { name, email, password }),
     verify: () => API.request('auth/verify'),
