@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Models\AuditLog;
 use App\Models\Quote;
 use App\Models\QuoteItem;
 
@@ -23,6 +24,7 @@ class QuoteController extends Controller
         $data['created_by'] = $request->user()->name;
         $quote = Quote::create($data);
         $this->saveItems($quote, $request->input('items', []));
+        AuditLog::record('create','quotes','Quote #'.($quote->number ?? $quote->id),'Created new quote',$request);
         return response()->json([
             'success' => true,
             'id'      => $quote->id,
