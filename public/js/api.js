@@ -1,4 +1,4 @@
-// REST API Client + Helpers 
+// REST API Client + Helpers
 const API = {
   async request(endpoint, method = 'GET', body = null) {
     if (OFFLINE) return LocalDB.handle(endpoint, method, body);
@@ -48,6 +48,7 @@ const API = {
     }
   },
   auth: {
+    logout: () => API.request('auth/logout', 'POST'),
     login: (email, password) => API.request('auth/login', 'POST', { email, password }),
     register: (name, email, password) => API.request('auth/register', 'POST', { name, email, password }),
     verify: () => API.request('auth/verify'),
@@ -99,7 +100,7 @@ const helpers = {
   addDays: (date, days) => { const r = new Date(date); r.setDate(r.getDate() + days); return r.toISOString().slice(0, 10); },
 };
 
-//  Quote preview renderer 
+// Quote preview renderer
 // Renders a quote in the exact layout of the Cayan Events Ke. PDF template.
 // The quote object shape mirrors what the API returns:
 //   { number, quote_date, valid_until, client_name, client_company, venue,
