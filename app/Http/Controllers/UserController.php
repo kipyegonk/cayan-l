@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\AuditLog;
 
 class UserController extends Controller
 {
@@ -84,6 +85,7 @@ class UserController extends Controller
             \Log::warning("Email failed for {$user->email}: " . $e->getMessage());
         }
 
+        AuditLog::record('create','users','User: '.$user->email,'Created new user',$request);
         return response()->json(['success' => true, 'id' => $user->id, 'temp_password' => $plainPassword], 201);
     }
 
@@ -97,6 +99,7 @@ class UserController extends Controller
             $data['permissions'] = $request->permissions;
         }
         $user->update($data);
+        AuditLog::record('update','users','User: '.$user->email,'Updated user',$request);
         return response()->json(['success' => true]);
     }
 
@@ -106,6 +109,7 @@ class UserController extends Controller
             return response()->json(['error' => 'Cannot delete yourself'], 400);
         }
         $user->delete();
+        AuditLog::record('delete','users','User: '.$user->email,'Deleted user',$request);
         return response()->json(['success' => true]);
     }
 
