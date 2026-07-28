@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\AuditLog;
 
 class AuthController extends Controller
 {
@@ -20,6 +21,7 @@ class AuthController extends Controller
             return response()->json(['error' => 'Account not verified'], 403);
         }
         $token = $user->createToken('api-token')->plainTextToken;
+        AuditLog::record('login', null, null, "Logged in successfully", $request);
         return response()->json([
             'success' => true,
             'token'   => $token,
@@ -53,6 +55,13 @@ class AuthController extends Controller
             'valid' => true,
             'user'  => $this->userArray($request->user()),
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        AuditLog::record('logout', null, null, "Logged out", $request);
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['success' => true]);
     }
 
     public function changePassword(Request $request)
