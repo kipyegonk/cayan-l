@@ -92,6 +92,7 @@ renderAuth() {
       case 'clients':   return this.renderClients();
       case 'users':     return this.renderUsers();
       case 'settings':  return this.renderSettings();
+      case 'audit':     return this.renderAudit();
       default: return '';
     }
   },
