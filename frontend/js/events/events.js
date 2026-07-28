@@ -77,7 +77,10 @@ Object.assign(app, {
         document.querySelector('.sidebar')?.classList.remove('open');
         document.getElementById('sidebar-backdrop')?.classList.remove('open');
       }));
-    document.getElementById('logout-btn')?.addEventListener('click', () => this.handleLogout());
+    document.getElementById('logout-btn')?.addEventListener('click', async () => {
+      try { await API.auth.logout(); } catch(e) {}
+      this.handleLogout();
+    });
 
     // Quote preview buttons 
     document.querySelectorAll('[data-preview-quote]').forEach(btn => {
@@ -465,6 +468,28 @@ Object.assign(app, {
         this.state.view = 'clients';
         this.render();
       });
+    });
+
+    // Audit Log
+    document.getElementById('audit-refresh-btn')?.addEventListener('click', () => {
+      this.loadAuditLogs();
+    });
+    document.getElementById('audit-filter-btn')?.addEventListener('click', () => {
+      const filters = {};
+      const user   = document.getElementById('audit-filter-user')?.value;
+      const module = document.getElementById('audit-filter-module')?.value;
+      const action = document.getElementById('audit-filter-action')?.value;
+      const from   = document.getElementById('audit-filter-from')?.value;
+      const to     = document.getElementById('audit-filter-to')?.value;
+      if (user)   filters.user_id = user;
+      if (module) filters.module  = module;
+      if (action) filters.action  = action;
+      if (from)   filters.from    = from;
+      if (to)     filters.to      = to;
+      this.loadAuditLogs(filters);
+    });
+    document.getElementById('audit-clear-btn')?.addEventListener('click', () => {
+      this.loadAuditLogs();
     });
 
     // Users (admin only) 
