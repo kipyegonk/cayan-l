@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Models\AuditLog;
 use App\Models\CatalogItem;
 
 class CatalogController extends Controller
