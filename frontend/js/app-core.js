@@ -35,7 +35,24 @@ const app = {
     return map[view] || null;
   },
 
-  setView(view) { this.state.view = view; this.render(); },
+  setView(view) {
+    // Load audit logs when switching to audit tab
+    if (view === 'audit') {
+      this.state.view = 'audit';
+      this.render();
+      this.loadAuditLogs();
+      return;
+    }
+    // Check permission before switching view
+    const moduleMap = { quotes:'quotes', newquote:'quotes', catalog:'catalog', clients:'clients', settings:'settings', users:'users' };
+    const module = moduleMap[view] || null;
+    if (module && !this.hasPermission(module, 'view')) {
+      this.notify('You do not have permission to access this section', 'error');
+      return;
+    }
+    this.state.view = view;
+    this.render();
+  },
 
   async handleLogin(email, password) {
     const result = await API.auth.login(email, password);
