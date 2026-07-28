@@ -59,6 +59,7 @@ renderAuth() {
       ...(this.hasPermission('catalog','view') ? [{ id: 'catalog', emoji: '📦', label: 'Catalog', module: 'catalog' }] : []),
       ...(this.hasPermission('clients','view') ? [{ id: 'clients', emoji: '👥', label: 'Clients', module: 'clients' }] : []),
       ...(this.state.user?.role === 'admin' ? [{ id: 'users', emoji: '🔑', label: 'Users', module: 'users' }] : []),
+      ...(this.state.user?.role === 'admin' ? [{ id: 'audit', emoji: '📋', label: 'Audit Log', module: null }] : []),
       ...(this.hasPermission('settings','view') ? [{ id: 'settings', emoji: '⚙️', label: 'Settings', module: 'settings' }] : []),
     ];
     return `<button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
