@@ -30,6 +30,7 @@ const app = {
       catalog: 'catalog', clients: 'clients',
       settings: 'settings', users: 'users',
       dashboard: null,
+      audit: null,
     };
     return map[view] || null;
   },
