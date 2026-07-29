@@ -13,7 +13,7 @@ Object.assign(app, {
     const actionIcon = {
       login:  '', logout: '',
       create: '', update: '',
-      delete: '🗑️', view:   '👁',
+      delete: '', view:   '👁',
     };
 
     return `<div class="view-wrap">
