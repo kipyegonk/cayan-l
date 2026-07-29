@@ -11,7 +11,7 @@ Object.assign(app, {
       delete: '#DC2626', view:   '#7C3AED',
     };
     const actionIcon = {
-      login:  '', logout: '🔒',
+      login:  '', logout: '',
       create: '➕', update: '✏️',
       delete: '🗑️', view:   '👁',
     };
