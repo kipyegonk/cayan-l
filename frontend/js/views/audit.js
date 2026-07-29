@@ -12,7 +12,7 @@ Object.assign(app, {
     };
     const actionIcon = {
       login:  '', logout: '',
-      create: '➕', update: '✏️',
+      create: '', update: '✏️',
       delete: '🗑️', view:   '👁',
     };
 
