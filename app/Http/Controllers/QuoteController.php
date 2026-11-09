@@ -32,12 +32,17 @@ class QuoteController extends Controller
         ], 201);
     }
 
-    public function update(Request $request, $id)
+        public function update(Request $request, $id)
     {
         $quote = Quote::findOrFail($id);
         $quote->update($request->except('items'));
-        QuoteItem::where('quote_id', $id)->delete();
-        $this->saveItems($quote, $request->input('items', []));
+
+        // Only touch items when the request actually includes them
+        if ($request->has('items')) {
+            QuoteItem::where('quote_id', $id)->delete();
+            $this->saveItems($quote, $request->input('items', []));
+        }
+
         return response()->json(['success' => true]);
     }
 
